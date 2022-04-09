@@ -10,5 +10,12 @@ urlpatterns = [
 
     # The home page
     path("", views.index, name='index'),
+    path("dashboard/", views.dashboard, name='dashboard'),
+    path("empresas/", views.empresas, name='empresas'),
+    path("empresas/create/", views.empresasC, name='empresasC'),
+    path("empresas/edit/", views.empresasE, name='empresasE'),
+    path("empresas/eliminar/", views.empresasD, name='empresasD'),
+    path("reportes/", views.reportes, name='reportes'),
+    
     
 ]
