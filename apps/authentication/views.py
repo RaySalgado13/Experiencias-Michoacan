@@ -42,6 +42,11 @@ def register_user(request):
             username = form.cleaned_data.get("username")
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
+            
+            #######################
+            #Add auth backend code#
+            #https://docs.djangoproject.com/es/4.0/topics/auth/default/#topic-authorization
+            #######################
 
             msg = 'User created - please <a href="/login">login</a>.'
             success = True
