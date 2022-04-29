@@ -6,7 +6,6 @@ from apps.authentication.decorators import allowed_users
 
 # Create your views here.
 @login_required(login_url="/login/")
-@allowed_users(allowed_roles=['empresas',])
 def index(request):
     return HttpResponse("Empresas 🏢")
 

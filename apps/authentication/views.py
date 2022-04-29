@@ -11,7 +11,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import Group
 from .forms import LoginForm, SignUpForm
-from .decorators import unauthenticated_user
+from .decorators import unauthenticated_user, allowed_users
 
 @unauthenticated_user
 def login_view(request):
@@ -37,7 +37,7 @@ def login_view(request):
 
     return render(request, "accounts/login.html", {"form": form, "msg": msg})
 
-
+@allowed_users(allowed_roles=['asociacion'])
 def register_user(request):
     msg = None
     success = False
@@ -49,13 +49,15 @@ def register_user(request):
             username = form.cleaned_data.get("username")
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
+            group = Group.objects.get(name='empresas')
+            user.groups.add(group)
             
             #######################
             #Add auth backend code#
             #https://docs.djangoproject.com/es/4.0/topics/auth/default/#topic-authorization
             #######################
 
-            msg = 'User created - please <a href="/login">login</a>.'
+            msg = '¡Usuario creado satisfactoriamente!-<a href="/login">Regresar a página de inicio</a>.'
             success = True
 
             # return redirect("/login/")
