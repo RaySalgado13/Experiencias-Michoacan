@@ -29,7 +29,7 @@ def login_view(request):
                 login(request, user)
                 user_groups = user.groups.all()
                 for user_group in user_groups:
-                    return redirect(f"/{user_group}")
+                    return redirect(f"/{user_group}/dashboard")
             else:
                 msg = 'Invalid credentials'
         else:
