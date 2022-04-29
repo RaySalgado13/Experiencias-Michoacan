@@ -4,8 +4,12 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 # Create your views here.
+from lib2to3.pgen2.token import EQUAL
+from operator import contains
+from unittest import result
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import Group
 from .forms import LoginForm, SignUpForm
 
 
@@ -20,9 +24,13 @@ def login_view(request):
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             user = authenticate(username=username, password=password)
+            groups = Group.objects.all()
+            
             if user is not None:
                 login(request, user)
-                return redirect("/")
+                user_groups = user.groups.all()
+                for user_group in user_groups:
+                    return redirect(f"/{user_group}")
             else:
                 msg = 'Invalid credentials'
         else:
