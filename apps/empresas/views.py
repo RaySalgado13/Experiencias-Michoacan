@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from apps.authentication.decorators import allowed_users
 
 # Create your views here.
-@login_required(login_url="/login/")
+
 def index(request):
     return HttpResponse("Empresas 🏢")
 
