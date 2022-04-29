@@ -6,25 +6,29 @@ Copyright (c) 2019 - present AppSeed.us
 from distutils.archive_util import make_zipfile
 from django.db import models
 from django.contrib.auth.models import User
-from itsdangerous import json
+
 
 # Create your models here.
+class Imagen(models.Model):
+    image = models.FileField(null=False, blank = False)
+    date_uploaded = models.DateTimeField(auto_now_add=True)
+
 
 class Producto(models.Model):
-
-    id = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=250)
     descripcion = models.TextField()
     precio = models.IntegerField()
-    fecha_inicio = models.DateTimeField(blank = True)
-    fecha_fin = models.DateTimeField(blank = True)
+    fecha_inicio = models.DateTimeField(blank = True, null=True)
+    fecha_fin = models.DateTimeField(blank = True, null=True)
     stock = models.IntegerField()
     empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE)
     tipo = models.ForeignKey('Tipo_producto' , on_delete=models.CASCADE)
+    imagen = models.ManyToManyField(Imagen)
+
+    def __str__(self):
+        return f"{self.nombre}  {self.descripcion[0:50]}"
 
 class Empresa(models.Model):
-
-    id = models.IntegerField(primary_key=True)
     nombre_legal = models.CharField(max_length=100)
     nombre_comercial = models.CharField(max_length=250, blank = True)
     email = models.EmailField(max_length=250)
@@ -33,9 +37,11 @@ class Empresa(models.Model):
     representante = models.CharField(max_length=200)
     direccion = models.ForeignKey('Direccion', on_delete=models.CASCADE) 
 
-class Direccion(models.Model):
+    def __str__(self):
+        return self.nombre_legal
+    
 
-    id = models.IntegerField(primary_key=True)
+class Direccion(models.Model):
     calle = models.CharField(max_length=100)
     numero_exterior = models.CharField(max_length=10)
     numero_interior = models.CharField(max_length=10, blank = True)
@@ -44,22 +50,18 @@ class Direccion(models.Model):
     ciudad = models.CharField(max_length=100)
     estado = models.CharField(max_length=100)
 
+    def __str__(self):
+        return f"{self.calle[0:50]} {self.numero_exterior} {self.cp}"
+
 
 class Tipo_producto(models.Model):
-
-    id = models.IntegerField(primary_key=True)
     tipo = models.CharField(max_length=50)
 
-class Imagenes(models.Model):
-
-    id = models.IntegerField(primary_key=True)
-    enlace = models.TextField()
-    producto = models.ForeignKey('Producto' , on_delete=models.CASCADE) 
-
+    def __str__(self):
+        return self.tipo
+    
 
 class Reservacion(models.Model):
-
-    id = models.IntegerField(primary_key=True)
     folio = models.CharField(max_length=250)
     nombre = models.CharField(max_length=100)
     email = models.EmailField(max_length=250, blank = True)
@@ -68,9 +70,10 @@ class Reservacion(models.Model):
     status = models.CharField(max_length=50)
     producto = models.ManyToManyField(Producto)
 
-class Reporte(models.Model):
+    def __str__(self) -> str:
+        return self.folio
 
-    id = models.IntegerField(primary_key=True)
+class Reporte(models.Model):
     titulo = models.CharField(max_length=250)
     fecha_inicio = models.DateTimeField()
     fecha_fin = models.DateTimeField()
@@ -78,9 +81,14 @@ class Reporte(models.Model):
     items = models.JSONField()
     tipo = models.ForeignKey('Tipo_reporte', on_delete=models.CASCADE)
 
-class Tipo_Reporte(models.Model):
+    def __str__(self):
+        return f"{self.titulo}"
 
-    id = models.IntegerField(primary_key=True)
+class Tipo_Reporte(models.Model):
     tipo = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.tipo
+    
 
 
