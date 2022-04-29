@@ -1,8 +1,8 @@
+from cmath import exp
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from apps.authentication.decorators import allowed_users
-
 
 # Create your views here.
 @login_required(login_url="/login/")
@@ -17,7 +17,9 @@ def dashboard(request):
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])
 def experiencias(request):
-    return HttpResponse("experiencias")
+    user = request.user
+    experiencias = user.empresa.producto_set.all() #Obtiene los datos del usuario autenticado
+    return HttpResponse(experiencias)
 
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])
