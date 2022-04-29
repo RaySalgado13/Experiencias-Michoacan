@@ -11,8 +11,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import Group
 from .forms import LoginForm, SignUpForm
+from .decorators import unauthenticated_user
 
-
+@unauthenticated_user
 def login_view(request):
     form = LoginForm(request.POST or None)
 
