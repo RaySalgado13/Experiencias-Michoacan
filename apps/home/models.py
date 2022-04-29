@@ -6,6 +6,7 @@ Copyright (c) 2019 - present AppSeed.us
 from distutils.archive_util import make_zipfile
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -13,9 +14,6 @@ class Imagen(models.Model):
     image = models.FileField(null=False, blank = False)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.image
 
 
 class Producto(models.Model):
@@ -44,6 +42,7 @@ class Empresa(models.Model):
     direccion = models.ForeignKey('Direccion', on_delete=models.CASCADE) 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nombre_legal
