@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import Group
 from .forms import LoginForm, SignUpForm
 from .decorators import unauthenticated_user, allowed_users
+from django.contrib.auth.decorators import login_required
 
 @unauthenticated_user
 def login_view(request):
@@ -37,6 +38,7 @@ def login_view(request):
 
     return render(request, "accounts/login.html", {"form": form, "msg": msg})
 
+@login_required(login_url="/login/")
 @allowed_users(allowed_roles=['asociacion'])
 def register_user(request):
     msg = None

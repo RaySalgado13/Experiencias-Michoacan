@@ -15,4 +15,4 @@ urlpatterns = [
     path("", include("apps.turista.urls")),
     path("empresas/", include("apps.empresas.urls")),
     path("asociacion/", include("apps.asociacion.urls"))
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
