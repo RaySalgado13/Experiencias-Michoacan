@@ -12,7 +12,7 @@ def index(request):
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])
 def dashboard(request):
-    return HttpResponse("dashboard")
+    return HttpResponse("dashboard empresas")
 
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])

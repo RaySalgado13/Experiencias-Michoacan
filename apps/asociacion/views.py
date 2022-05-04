@@ -13,7 +13,7 @@ def index(request):
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['asociacion',])
 def dashboard(request):
-    return HttpResponse("dashboard")
+    return HttpResponse("dashboard asociacion")
 
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['asociacion',])

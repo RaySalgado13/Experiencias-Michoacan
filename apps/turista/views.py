@@ -11,7 +11,7 @@ from django.urls import reverse
 
 # Create your views here.
 def index(request):
-    return HttpResponse(f"Turistas 🌴")
+    return render(request, 'turista/index.html', {})
 def catalogo(request):
     return HttpResponse("catalogo")
 def detalles(request,id_producto):
