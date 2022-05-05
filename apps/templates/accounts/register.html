@@ -35,7 +35,7 @@
                 <span class="text-danger">{{ msg | safe }}</span>
             {% else %}
             <span>
-                Add your credentials
+                Ingrese los datos del registro de usuario
             </span>
             {% endif %}            
         </p>
@@ -83,19 +83,9 @@
             </div>
           </div>
           <span class="text-error">{{ form.password2.errors }}</span>
-          
-          <div class="row">
-            <div class="col-8">
-              <div class="icheck-primary">
-                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-                <label for="agreeTerms">
-                I agree to the <a href="#">terms</a>
-                </label>
-              </div>
-            </div>
             <!-- /.col -->
             <div class="col-4">
-              <button type="submit" name="register" class="btn btn-primary btn-block">Register</button>
+              <button type="submit" name="register" class="btn btn-primary btn-block">Registrar</button>
             </div>
             <!-- /.col -->
           </div>
@@ -103,13 +93,7 @@
 
         <br />
         <div class="text-center">
-            Have an account? <a href="{% url 'login' %}" class="text-center">Login</a>
-            <br />
-            <br />
-            &copy; ColorLib 
-            <a target="_blank" rel="noopener noreferrer"
-               href="https://appseed.us/admin-dashboards/django-dashboard-adminlte"><b>Admin</b>LTE</a> 
-            - coded by <a target="_blank" rel="noopener noreferrer" href="https://appseed.us">AppSeed</a>.
+            &copy; Asociación de turismo de Michoacán
         </div>
 
       </div>
