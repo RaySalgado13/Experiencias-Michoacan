@@ -10,7 +10,7 @@ def unauthenticated_user(view_func):
         if user.is_authenticated:
             user_groups = user.groups.all()
             for user_group in user_groups:
-                return redirect(f"/{user_group}")
+                return redirect(f"/{user_group}/dashboard")
         else:
             return view_func(request, *args, **kwargs)
     return wrapper_func

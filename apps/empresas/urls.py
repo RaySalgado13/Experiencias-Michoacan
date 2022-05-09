@@ -10,15 +10,15 @@ urlpatterns = [
 
     # The home page
     path("", views.index, name='empresas'),
-    path("dashboard/", views.dashboard, name='dashboard'),
-    path("experiencias/", views.experiencias, name='experiencias'),
-    path("experiencias/create/", views.experienciasC, name='create'),
-    path("experiencias/edit/", views.experienciasE, name='experienciasE'),
-    path("experiencias/delete/", views.experienciasD, name='experienciasD'),
-    path("reservaciones/", views.reservaciones, name='reservaciones'),
-    path("reservaciones/edit/", views.reservacionesE, name='reservacionesE'),
-    path("reservaciones/eliminar/", views.reservacionesD, name='reservacionesD'),
-    path("reportes/", views.reportes, name='reportes'),
+    path("dashboard/", views.dashboard, name='dashboard_empresas'),
+    path("experiencias/", views.experiencias, name='experiencias-empresas'),
+    path("experiencias/create/", views.experienciasC, name='experiencias-create'),
+    path("experiencias/edit/<int:id_experiencia>", views.experienciasE, name='experiencias-edit'),
+    path("experiencias/delete/<int:id_experiencia>", views.experienciasD, name='experiencias-delete'),
+    path("reservaciones/", views.reservaciones, name='reservaciones-empresas'),
+    path("reservaciones/edit/<int:id>", views.reservacionesE, name='reservacionesE'),
+    path("reservaciones/eliminar/<int:id>", views.reservacionesD, name='reservacionesD'),
+    path("reportes/", views.reportes, name='reportes-empresas'),
     path("correo/", views.correo, name='correo'),
      
      

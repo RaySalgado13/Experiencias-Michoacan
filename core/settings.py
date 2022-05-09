@@ -4,6 +4,7 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 import os
+from pickle import TRUE
 from decouple import config
 from unipath import Path
 
@@ -141,6 +142,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(CORE_DIR, 'apps/static'),
 )
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/assets/images/')
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 

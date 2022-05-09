@@ -10,12 +10,6 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
-class Imagen(models.Model):
-    image = models.FileField(null=False, blank = False)
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
-
-
 class Producto(models.Model):
     nombre = models.CharField(max_length=250)
     descripcion = models.TextField()
@@ -25,12 +19,17 @@ class Producto(models.Model):
     stock = models.IntegerField()
     empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE)
     tipo = models.ForeignKey('Tipo_producto' , on_delete=models.CASCADE)
-    imagen = models.ManyToManyField(Imagen)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.nombre}  {self.descripcion[0:50]}"
+        return f"{self.nombre}"
+
+class Imagen(models.Model):
+    experiencia = models.ForeignKey(Producto, on_delete=models.SET_NULL, null=True, blank=True)
+    image = models.ImageField(null=False, blank = False)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
 class Empresa(models.Model):
     nombre_legal = models.CharField(max_length=100)
