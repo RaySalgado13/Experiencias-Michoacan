@@ -5,27 +5,13 @@
 <!-- Element injected in the BODY element -->
 {% block body_class %} sidebar-mini layout-fixed {% endblock body_class %} 
 
-<!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="/static/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
-
-{% endblock stylesheets %}
-
 {% block content %}  
     <div class="container">
         <div class="row">
             {% for experiencia in experiencias  %}
                 <div class="col-sm">
                     <div class="card" style="width: 18rem;">
-                        <img src="{{experiencia.imagen_set.all.0.image.url}}" class="card-img-top" alt="...">
+                        <img src="{{experiencia.imagen_set.all.0.image.url}}" class="card-img-top" alt="{{experiencia.imagen_set.all.0.image}}">
                         <div class="card-body">
                           <h5 class="card-title">{{experiencia.nombre}}</h5>
                           <p class="card-text">{{experiencia.descripcion}}</p>
@@ -38,10 +24,5 @@
                 <h3>No hay experiencias registradas</h3>
             {% endfor %}
         </div>
-        
     </div>
 {% endblock content %}
-
-<!-- Specific Page JS goes HERE  -->
-{% block javascripts %}
-{% endblock javascripts %}
