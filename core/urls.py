@@ -7,7 +7,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include  # add this
 from django.conf.urls.static import static
-from apps.home import views
+from apps.home import views 
 
 urlpatterns = [
     path('admin/', admin.site.urls),          # Django admin route
@@ -16,6 +16,7 @@ urlpatterns = [
     path("", include("apps.turista.urls"), name="inicio"),
     path("empresas/", include("apps.empresas.urls")),
     path("asociacion/", include("apps.asociacion.urls")),
+    path('webhook/', views.my_webhook_view)
 ]
 
 handler404 = "apps.home.views.handle_not_found"
