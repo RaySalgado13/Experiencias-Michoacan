@@ -6,23 +6,39 @@
 {% block body_class %} sidebar-mini layout-fixed {% endblock body_class %} 
 
 {% block content %}  
-    <div class="container">
-        <div class="row">
-            {% for experiencia in experiencias  %}
-                <div class="col-sm">
-                    <div class="card" style="width: 18rem;">
-                        <img src="{{experiencia.imagen_set.all.0.image.url}}" class="card-img-top" alt="{{experiencia.imagen_set.all.0.image}}">
-                        <div class="card-body">
-                          <h5 class="card-title">{{experiencia.nombre}}</h5>
-                          <p class="card-text">{{experiencia.descripcion}}</p>
-                          <a href="{% url 'experiencias-edit' experiencia.id %}" class="btn btn-secondary">Editar</a>
-                          <a href="{% url 'experiencias-delete' experiencia.id %}" class="btn btn-danger">Eliminar</a>
-                        </div>
-                      </div>
-                </div>
-              {% empty %}
-                <h3>No hay experiencias registradas</h3>
-            {% endfor %}
+    <div class="d-flex justify-content-between align-items-center pt-5 pb-5">
+      <div class="m-3">
+        <h1 class="">Experiencias</h1>
+      </div>
+      <div class="d-flex flex-wrap align-items-center m-3" style="gap: 10px;">
+        <div class="dropdown">
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+            Filtrar
+          </a>
+        
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
         </div>
+        <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Agregar experiencia</a>
+      </div>
+      
+    </div>
+    <div class="grid_experiencias">
+        {% for experiencia in experiencias  %}         
+        <div class="card grid_experiencias__card" style="">
+          <img src="{{experiencia.imagen_set.all.0.image.url}}" class="card-img-top" alt="{{experiencia.imagen_set.all.0.image}}">
+          <div class="card-body grid_experiencias__card">
+            <h5 class="card-title"><b>{{experiencia.nombre}}</b></h5>
+            <p class="card-text">{{experiencia.descripcion|slice:"0:40"}}...</p>
+            <a href="{% url 'experiencias-edit' experiencia.id %}" class="btn btn-secondary">Editar</a>
+            <a href="{% url 'experiencias-delete' experiencia.id %}" class="btn btn-danger">Eliminar</a>
+          </div>
+        </div>
+        {% empty %}
+          <h3>No hay experiencias registradas</h3>
+      {% endfor %}
     </div>
 {% endblock content %}

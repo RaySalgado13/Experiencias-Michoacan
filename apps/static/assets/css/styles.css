@@ -1,1 +1,19 @@
 /*Custom styles here*/
+.grid_experiencias{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    align-items: center;
+    justify-items: center;
+    row-gap: 20px;
+}
+
+.grid_experiencias__card{
+    width: 95%;
+    height: 100%;
+}
+
+@media screen and (max-width:768px) {
+    .grid_experiencias{
+        grid-template-columns: 100%
+    }
+}
