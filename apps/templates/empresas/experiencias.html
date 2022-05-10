@@ -17,12 +17,13 @@
           </a>
         
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="{% url 'experiencias-empresas'%}">Todos</a>
+            {% for categoria in categorias  %}
+              <a class="dropdown-item" href="{% url 'experiencias-empresas'%}?categoria={{categoria}} ">{{categoria}}</a>
+            {% endfor %}
           </div>
         </div>
-        <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Agregar experiencia</a>
+        <a href="{% url 'experiencias-create'%}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Agregar experiencia</a>
       </div>
       
     </div>
@@ -38,7 +39,7 @@
           </div>
         </div>
         {% empty %}
-          <h3>No hay experiencias registradas</h3>
+          <h3 style="display: block;">No hay experiencias registradas</h3>
       {% endfor %}
     </div>
 {% endblock content %}
