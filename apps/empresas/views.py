@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from apps.authentication.decorators import allowed_users
+from django.core.paginator import Paginator
 from apps.home.models import Producto,Tipo_producto, Empresa
 # Create your views here.
 
@@ -23,12 +24,16 @@ def dashboard(request):
 def experiencias(request):
     user = request.user
     categoria = request.GET.get('categoria')
-    print(categoria)
+    page = request.GET.get('page')
     if categoria == None:
         #experiencias = user.empresa.producto_set.all() #Obtiene los datos del usuario autenticado
         experiencias = Producto.objects.filter(empresa__user=user)
     else:
-        experiencias = Producto.objects.filter(empresa__user=user, tipo__tipo=categoria)            
+        experiencias = Producto.objects.filter(empresa__user=user, tipo__tipo=categoria)        
+    
+    paginator = Paginator(experiencias, 1)
+    experiencias = paginator.get_page(page)
+
     categorias = Tipo_producto.objects.all()
 
     context = {
