@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from apps.authentication.decorators import allowed_users,unauthenticated_user
+from apps.home.models import Empresa
 
 
 # Create your views here.
@@ -13,7 +14,11 @@ def index(request):
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['asociacion',])
 def dashboard(request):
-    return HttpResponse("dashboard asociacion")
+    empresas = Empresa.objects.all()
+    context = {
+        "empresas" : empresas
+    }
+    return render(request,"asociacion/dashboard.html",context)
 
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['asociacion',])
