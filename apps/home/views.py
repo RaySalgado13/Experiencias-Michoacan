@@ -9,6 +9,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from django.shortcuts import render
+from django.contrib.auth.models import Group
 
 
 def index(request):
@@ -46,3 +47,12 @@ def pages(request):
 
 def handle_not_found(request, exception):
         return render(request,'home/page-404.html')
+
+
+from django import template
+
+register = template.Library() 
+
+@register.filter(name='has_group') 
+def has_group(user, group_name):
+    return user.groups.filter(name=group_name).exists() 

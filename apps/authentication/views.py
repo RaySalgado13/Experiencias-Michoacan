@@ -7,6 +7,7 @@ Copyright (c) 2019 - present AppSeed.us
 from lib2to3.pgen2.token import EQUAL
 from operator import contains
 from unittest import result
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import Group
@@ -61,8 +62,8 @@ def register_user(request):
 
             msg = '¡Usuario creado satisfactoriamente!-<a href="/login">Regresar a página de inicio</a>.'
             success = True
-
-            # return redirect("/login/")
+            
+            return redirect("/manage/empresa/")
 
         else:
             msg = 'Form is not valid'
@@ -70,3 +71,14 @@ def register_user(request):
         form = SignUpForm()
 
     return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
+
+def validate():
+    return HttpResponse('aaaaaaaaa')
+
+@login_required(login_url="/login/")
+@allowed_users(allowed_roles=['asociacion'])
+def register_empresa(request):
+    if request.method == 'POST':
+        return HttpResponse(f'registrar Empresa POST')
+    else:
+        return HttpResponse(f'registrar Empresa GET')

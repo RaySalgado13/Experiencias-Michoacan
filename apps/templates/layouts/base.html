@@ -49,7 +49,16 @@
 <div class="wrapper">
 
     {% include 'includes/navigation.html' %}
-    {% include 'includes/sidebar-empresas.html' %}
+    
+    {% for grupo in request.user.groups.all %}
+        {% if grupo.name == "empresas" %}
+          {% include 'includes/sidebar-empresas.html' %}
+          {% else %}
+            {% include 'includes/sidebar-asociacion.html' %}
+        {% endif %}
+    {% endfor %}
+    
+    
     
     <div class="content-wrapper">
       {% block content %}
