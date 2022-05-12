@@ -13,8 +13,8 @@ urlpatterns = [
     path("dashboard/", views.dashboard, name='dashboard_asociacion'),
     path("empresas/", views.empresas, name='asociacion_empresas'),
     path("empresas/create/", views.empresasC, name='asociacion_empresas_create'),
-    path("empresas/edit/", views.empresasE, name='asociacion_empresas_edit'),
-    path("empresas/eliminar/", views.empresasD, name='asociacion_empresas_delete'),
+    path("empresas/edit/<int:id>/", views.empresasE, name='asociacion_empresas_edit'),
+    path("empresas/eliminar/<int:id>/", views.empresasD, name='asociacion_empresas_delete'),
     path("reportes/", views.reportes, name='asociacion_reportes'),
     
     

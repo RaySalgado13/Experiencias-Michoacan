@@ -31,7 +31,7 @@ def experiencias(request):
     else:
         experiencias = Producto.objects.filter(empresa__user=user, tipo__tipo=categoria)        
     
-    paginator = Paginator(experiencias, 1)
+    paginator = Paginator(experiencias, 8)
     experiencias = paginator.get_page(page)
 
     categorias = Tipo_producto.objects.all()

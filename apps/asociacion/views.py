@@ -32,12 +32,12 @@ def empresasC(request):
 
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['asociacion',])
-def empresasE(request):
+def empresasE(request, id):
     return HttpResponse("empresas editar")
 
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['asociacion',])
-def empresasD(request):
+def empresasD(request, id):
     return HttpResponse("empresas eliminar")
 
 @login_required(login_url="/login/")
