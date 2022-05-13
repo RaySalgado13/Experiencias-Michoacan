@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: 'Signika Negative', sans-serif;
+    font-size: 62.5%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+}
+
+.cart{
+    object-fit: cover;
+    width: 30px;
+    height: 30px;
+}
+
+@media screen and (max-width: 991px) {
+    .cart{
+        margin-top: 20%;
+    }
+    .footer__asociacion  h5{
+        text-align: center;
+    }
+}
+
+footer{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    justify-content: space-between ;
+    background-color: #fff;
+    position: absolute;
+    bottom: 0;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    footer{
+        flex-direction: column;
+    }
+}
+
+.footer__redes{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.footer__redes > p{
+    font-size: 1em;
+}
+
+.footer__redes-item{
+    object-fit: contain;
+    width: 50px;
+    height: 50px;
+}
+
+.footer__asociacion{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.footer__avisos{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.footer__avisos  a{
+    text-decoration: none;
+
+}

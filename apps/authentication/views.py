@@ -63,7 +63,7 @@ def register_user(request):
             msg = '¡Usuario creado satisfactoriamente!-<a href="/login">Regresar a página de inicio</a>.'
             success = True
             
-            return redirect("/manage/empresa/")
+            #return redirect("/manage/empresa/")
 
         else:
             msg = 'Form is not valid'
