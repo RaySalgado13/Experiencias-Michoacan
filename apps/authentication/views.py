@@ -14,6 +14,7 @@ from django.contrib.auth.models import Group
 from .forms import LoginForm, SignUpForm
 from .decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.decorators import login_required
+from apps.home.models import Empresa, Direccion
 
 @unauthenticated_user
 def login_view(request):
@@ -48,12 +49,56 @@ def register_user(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
+            user_form = form.save()
             username = form.cleaned_data.get("username")
+            email = form.cleaned_data.get("email")
             raw_password = form.cleaned_data.get("password1")
+
+            nombre_legal = form.cleaned_data.get("nombre_legal")
+            nombre_comercial = form.cleaned_data.get("nombre_comercial")
+            rfc = form.cleaned_data.get("rfc")
+            telefono = form.cleaned_data.get("telefono")
+            representante = form.cleaned_data.get("representante")
+
+            calle = form.cleaned_data.get("calle")
+            numero_interior = form.cleaned_data.get("numero_interior")
+            numero_exterior = form.cleaned_data.get("numero_exterior")
+            colonia = form.cleaned_data.get("colonia")
+            cp = form.cleaned_data.get("cp")
+            ciudad = form.cleaned_data.get("ciudad")
+
             user = authenticate(username=username, password=raw_password)
             group = Group.objects.get(name='empresas')
             user.groups.add(group)
+
+            direccion = Direccion.objects.create(
+                calle = calle,
+                numero_exterior = numero_exterior,
+                numero_interior = numero_interior,
+                colonia = colonia,
+                cp = cp,
+                ciudad = ciudad,
+                estado = 'Michoacán'
+            )
+
+            empresa = Empresa.objects.create(
+                nombre_legal = nombre_legal,
+                nombre_comercial = nombre_comercial,
+                email = email,
+                rfc = rfc,
+                telefono = telefono,
+                representante = representante,
+                direccion = direccion,
+                user = user
+            )
+
+            print(f"""
+            {user}
+            {direccion}
+            {empresa}
+            """)
+
+            
             
             #######################
             #Add auth backend code#
@@ -66,7 +111,7 @@ def register_user(request):
             #return redirect("/manage/empresa/")
 
         else:
-            msg = 'Form is not valid'
+            msg = 'El formulario no es válido, inténtelo nuevamente'
     else:
         form = SignUpForm()
 

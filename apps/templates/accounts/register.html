@@ -21,11 +21,10 @@
 
 {% block content %}
 
-  <div class="register-box">
+  <div class="container-fluid">
 
     <div class="login-logo">
-      <a target="_blank" rel="noopener noreferrer" 
-         href="https://appseed.us/admin-dashboards/django-dashboard-adminlte"><b>Experiencias</b> Michoacán</a>
+      <p><b>Experiencias</b> Michoacán</p>
     </div>   
 
     <div class="card">
@@ -44,50 +43,172 @@
 
           {% csrf_token %}
 
-          <div class="input-group mb-3">
-            {{ form.username }}
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
+          <div class="d-flex flex-wrap justify-content-center" style="gap:30px">
+            <!--Datos de usuario-->
+            <div>
+              <h3>Datos de dirección</h3>
+              <hr>
+              <div class="input-group mb-3">
+                {{ form.username }}
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <span class="text-error">{{ form.username.errors }}</span>
-          
-          <div class="input-group mb-3">
-            {{ form.email }}
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
+              <span class="text-error">{{ form.username.errors }}</span>
+              
+              <div class="input-group mb-3">
+                {{ form.email }}
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-envelope"></span>
+                  </div>
+                </div>
               </div>
+              <span class="text-error">{{ form.email.errors }}</span>
+    
+              <div class="input-group mb-3">
+                {{ form.password1 }}
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
+                </div>
+              </div>
+              <span class="text-error">{{ form.password1.errors }}</span>
+    
+              <div class="input-group mb-3">
+                {{ form.password2 }}
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
+                </div>
+              </div>
+              <span class="text-error">{{ form.password2.errors }}</span>
+              
             </div>
-          </div>
-          <span class="text-error">{{ form.email.errors }}</span>
 
-          <div class="input-group mb-3">
-            {{ form.password1 }}
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
+            <!--Datos de Empresa y Dirección-->
+            <div>
+              <h3>Datos de la empresa</h3>
+              <hr>
+              <div class="input-group mb-3">
+                {{ form.nombre_legal }}
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <span class="text-error">{{ form.password1.errors }}</span>
+              <span class="text-error">{{ form.nombre_legal.errors }}</span>
 
-          <div class="input-group mb-3">
-            {{ form.password2 }}
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
+              <div class="input-group mb-3">
+                {{ form.nombre_comercial }}
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                  </div>
+                </div>
+              </div>
+              <span class="text-error">{{ form.nombre_comercial.errors }}</span>
+
+              <div class="input-group mb-3">
+                {{ form.rfc }}
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                  </div>
+                </div>
+              </div>
+              <span class="text-error">{{ form.rfc.errors }}</span>
+
+              <div class="input-group mb-3">
+                {{ form.telefono }}
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                  </div>
+                </div>
+              </div>
+              <span class="text-error">{{ form.telefono.errors }}</span>
+             
+              <div class="input-group mb-3">
+                {{ form.representante }}
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                  </div>
+                </div>
+              </div>
+              <span class="text-error">{{ form.representante.errors }}</span>
+
+              <h3>Datos de dirección</h3>
+              <hr>
+
+              <div class="input-group mb-3">
+                {{ form.calle }}
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                  </div>
+                </div>
+              </div>
+              <span class="text-error">{{ form.calle.errors }}</span>
+
+              <div class="d-flex" style="gap:10px;">
+                <div class="input-group mb-3 w-50">
+                  {{ form.numero_interior }}
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                    </div>
+                  </div>
+                </div>
+                <span class="text-error">{{ form.numero_interior.errors }}</span>
+                
+                <div class="input-group mb-3 w-50">
+                  {{ form.numero_exterior }}
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                    </div>
+                  </div>
+                </div>
+                <span class="text-error">{{ form.numero_exterior.errors }}</span>
+              </div>
+
+              <div class="d-flex" style="gap:10px;">
+
+                <div class="input-group mb-3">
+                  {{ form.colonia }}
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                    </div>
+                  </div>
+              </div>
+              <span class="text-error">{{ form.colonia.errors }}</span>
+
+                <div class="input-group mb-3 w-50">
+                  {{ form.cp }}
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                    </div>
+                  </div>
+                </div>
+                <span class="text-error">{{ form.cp.errors }}</span>
+              </div>
+
+              
+              
+              <div class="input-group mb-3">
+                {{ form.ciudad }}
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                  </div>
+                </div>
+              </div>
+              <span class="text-error">{{ form.ciudad.errors }}</span>
+
+              <div class="d-flex justify-content-end">
+                <div class="">
+                  <button type="submit" name="register" class="btn btn-primary btn-block">Registrar</button>
+                </div>
               </div>
             </div>
-          </div>
-          <span class="text-error">{{ form.password2.errors }}</span>
-            <!-- /.col -->
-            <div class="col-4">
-              <button type="submit" name="register" class="btn btn-primary btn-block">Siguiente</button>
-            </div>
-            <!-- /.col -->
           </div>
         </form>
 
@@ -99,6 +220,7 @@
       </div>
       <!-- /.form-box -->
     </div><!-- /.card -->
+    
   </div>
 
 {% endblock content %}
