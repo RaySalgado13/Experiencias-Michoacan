@@ -9,7 +9,7 @@ from apps.home.models import Producto,Tipo_producto, Empresa
 # Create your views here.
 
 def index(request):
-    return HttpResponse("Empresas 🏢")
+    return render(request,"empresas/index.html")
 
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])

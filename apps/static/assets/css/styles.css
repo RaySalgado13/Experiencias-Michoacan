@@ -17,3 +17,29 @@
         grid-template-columns: 100%
     }
 }
+
+/*LAnding page empresas*/
+
+    #landing_header{
+        background-image: url('/static/assets/images/p1.png');
+        background-size: cover;
+        height: 60vh;
+        display: flex;
+        justify-content: end;
+        align-items: flex-end;
+    }
+    
+    .rounded{
+        border-radius: 20px !important;
+    }
+
+    #acercade{
+        width: 50%;
+    }
+
+    @media screen and (max-width:768px) {
+        #acercade{
+            width: 100%;
+        }
+    }
+/*LAnding page empresas*/

@@ -18,4 +18,4 @@ urlpatterns = [
     path("reportes/", views.reportes, name='asociacion_reportes'),
     
     
-]
+]   

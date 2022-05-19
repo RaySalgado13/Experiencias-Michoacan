@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+  
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+      <title>Bienvenida</title>
+    </head>
+    <body>
+      <style>
+        .imgbgd {
+          background-image: src("/static/assets/images/p1.png");
+        }
+        .txtcntr {
+  
+        }
+      </style>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="..">
+              <img src="/static/assets/images/Logo.png" width="60" height="60" alt="">
+              <a class="btn btn-secondary" href="{% url 'login' %}">Iniciar sesion</a>
+            </a>
+          </nav>
+          <div id="landing_header">
+            <div id="acercade" class="text-center text-white p-3 m-2 rounded" style="background-color: #FFC300;"><h2>Acerca de nosotros</h2><p>Somos la Asociación turística de Morelia, buscamos impulsar el turismo de nuestro estado y para ello te invitamos a unirte a nosotros en esta página donde ofertaras tus productos y servicios </p></div>
+          </div>
+        </div>
+
+          <div class="text-center text-white p-5" style="background-color: #333333;"><h1>¿Por qué nosotros?</h1><p>En la asociación tenemos como objetivo ofrecer una plataforma de fácil uso para los turistas que busquen tener experiencias nuevas redescubriendo el estado de Michoacán con la oportunidad de crear sus propios viajes y experiencias, y asi impulsar la economía en el sector turistico</p></div>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm">
+                <img src="/static/assets/images/p2.png" class="img-fluid" alt="Responsive image">
+              </div>
+              <div class="col-sm">
+                <img src="/static/assets/images/p3.png" class="img-fluid" alt="Responsive image">
+              </div>
+              <div class="col-xl">
+                <img src="/static/assets/images/p4.png" class="img-fluid" alt="Responsive image">
+              </div>
+              <div class="col-xl">
+                <img src="/static/assets/images/p5.png" class="img-fluid" alt="Responsive image">
+              </div>
+            </div>
+          </div>
+
+          <section class="">
+            <!-- Footer -->
+            <footer class="text-center text-white" style="background-color: #333333;">
+          
+              <!-- Copyright -->
+              <div class="container" >
+                <div class="row">
+                  <div class="col-lg">
+                    Contáctanos experiencias.michoacan@outlook.com
+                  </div>
+                  <div class="col-lg">
+                    © Experiencias Michoacán.
+                  </div>
+                  <div class="col-lg">
+                    Aviso de privacidad. Términos y condiciones.
+                  </div>
+                </div>
+              </div>
+              <!-- Copyright -->
+            </footer>
+            <!-- Footer -->
+          </section>
+  
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+  </html>
