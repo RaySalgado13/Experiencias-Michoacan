@@ -6,6 +6,31 @@
 {% block body_class %} sidebar-mini layout-fixed {% endblock body_class %} 
 
 {% block content %}  
+
+{% if success %}
+<div class="modal fade show" id="modal-success" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-success">
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">Empresa eliminada con éxito</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{msg}}</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-light">Save changes</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+{% endif %}
+
 <section id="Empresas">
   <div class="container p-3">
     <div class="d-flex justify-content-end m-2">
@@ -29,16 +54,41 @@
           <tbody>  
               {% for empresa in empresas %} 
               <tr>
-                <th scope="row">{{empresa.id}}</th>
+                <th scope="row">{{forloop.counter}}</th>
                 <td>{{empresa}}</td>
                 <td>{{empresa.direccion.ciudad}}</td>  
                 <td>
                   <div class="container">
-                    <a class="btn btn-danger" href="{% url 'asociacion_empresas_delete' empresa.id %}">Eliminar</a>
-                    <a class="btn btn-warning"  href="{% url 'asociacion_empresas_edit' empresa.id %}">Editar</a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger-{{empresa.id}}">
+                      Eliminar
+                    </button>
+                    <a class="btn btn-warning"  href="{% url 'edit_empresa' empresa.id %}">Editar</a>
                   </div>
                 </td>
-              </tr>  
+              </tr>
+
+              <div class="modal fade" id="modal-danger-{{empresa.id}}" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content bg-danger">
+                    <div class="modal-header">
+                      <h4 class="modal-title">¿Está seguro que desea eliminar la cuenta {{empresa.nombre_legal}}?</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Esta acción no se puede deshacer</p>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                      <button type="button" class="btn btn-outline-light" data-dismiss="modal">Regresar</button>
+                      <a class="btn btn-danger" href="{% url 'delete_empresa' empresa.id %}">Eliminar</a>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+
               {% endfor %}
           </tbody>
         </table>

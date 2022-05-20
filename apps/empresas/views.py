@@ -1,11 +1,12 @@
 from cmath import exp
 from multiprocessing import context
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from apps.authentication.decorators import allowed_users
 from django.core.paginator import Paginator
-from apps.home.models import Producto,Tipo_producto, Empresa
+from apps.home.models import Imagen, Producto,Tipo_producto, Empresa
+from .forms import ImagenForm,ProductoForm
 # Create your views here.
 
 def index(request):
@@ -48,10 +49,37 @@ def experiencias(request):
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])
 def experienciasCreate(request):
-    context = {
-        "user": request.user,
-    }
-    return render(request,'empresas/experiencias-create.html', context)
+    msg = None
+    success = False
+
+    if request.method == 'POST':
+
+        producto_form = ProductoForm(request.POST)
+        empresa = Empresa.objects.get(user = request.user)
+        images = request.FILES.getlist('imagenes')
+
+        if producto_form.is_valid():
+            producto = producto_form.save()
+            producto.empresa = empresa
+            producto.save()
+
+            for img in images:
+                imagen = Imagen.objects.create(
+                    experiencia = producto,
+                    image = img
+                )
+            return redirect("experiencias-empresas")
+            success = True
+
+        else:
+            msg = 'El formulario no es válido, inténtelo nuevamente'
+                
+    else:
+        
+        producto_form = ProductoForm()
+
+    return render(request, "empresas/experiencias-create.html", {"producto_form": producto_form, "msg":msg, "success":success})
+
 
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])

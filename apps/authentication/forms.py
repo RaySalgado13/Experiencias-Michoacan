@@ -6,6 +6,7 @@ Copyright (c) 2019 - present AppSeed.us
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from apps.home.models import Direccion, Empresa
 
 
 class LoginForm(forms.Form):
@@ -131,9 +132,96 @@ class SignUpForm(UserCreationForm):
                 "class": "form-control"
             }
         ))
-    
-    
-
     class Meta: #Es donde se coloca informacion adicional acerca de la clase
         model = User
         fields = ('username', 'email', 'password1', 'password2')
+
+
+class EmpresasForm(forms.ModelForm):
+    nombre_legal = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Nombre legal",
+                "class": "form-control"
+            }
+        ))
+    nombre_comercial = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Nombre comercial",
+                "class": "form-control"
+            }
+        ))
+    rfc = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "RFC",
+                "class": "form-control"
+            }
+        ))
+    telefono = forms.IntegerField(
+        widget=forms.NumberInput(
+            attrs={
+                "placeholder": "Teléfono",
+                "class": "form-control"
+            }
+        ))
+    representante = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Nombre del representante",
+                "class": "form-control"
+            }
+        ))
+
+    class Meta:
+        model = Empresa
+        fields = ['nombre_legal', 'nombre_comercial','rfc','telefono','representante']
+
+class DireccionForm(forms.ModelForm):
+    calle = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Calle",
+                "class": "form-control"
+            }
+        ))
+    numero_interior = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Número interior",
+                "class": "form-control"
+            }
+        ), required=False)
+    numero_exterior = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Número exterior",
+                "class": "form-control"
+            }
+        ))
+    colonia = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Colonia",
+                "class": "form-control"
+            }
+        ))
+    cp = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Código Postal",
+                "class": "form-control"
+            }
+        ))
+    ciudad = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Ciudad",
+                "class": "form-control"
+            }
+        ))
+
+    class Meta:
+        model = Direccion
+        fields = ['calle','numero_exterior','numero_interior','colonia','cp','ciudad',]
