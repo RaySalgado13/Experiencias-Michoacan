@@ -135,13 +135,13 @@ def edit_empresa(request, id_empresa):
 @allowed_users(allowed_roles=['asociacion'])
 def delete_empresa(request, id_empresa):
 
+
     try:
         empresa = Empresa.objects.get(id=id_empresa)
         user = empresa.user
         empresa.delete()
         user.delete()
     except:
-        print('Ocurrió un error')
+        print('Ocurrió un error al intentar eliminar el usuario, existe on delete protect')
 
-
-    return redirect("/login")
+    return redirect("dashboard_asociacion")

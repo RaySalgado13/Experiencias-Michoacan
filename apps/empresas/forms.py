@@ -8,9 +8,6 @@ class DateTimePickerInput(forms.DateTimeInput):
         input_type = 'datetime'
 
 class ProductoForm(forms.ModelForm):
-
-    
-
     nombre = forms.CharField(
         widget=forms.TextInput(
             attrs={

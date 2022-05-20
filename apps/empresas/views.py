@@ -15,8 +15,10 @@ def index(request):
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])
 def dashboard(request):
+    experiencias = Producto.objects.filter(empresa__user = request.user).order_by('-modified')[:4]
+
     context = {
-        "user": request.user
+        "experiencias":experiencias
     }
     return render(request,'empresas/dashboard.html', context)
 
@@ -28,7 +30,7 @@ def experiencias(request):
     page = request.GET.get('page')
     if categoria == None:
         #experiencias = user.empresa.producto_set.all() #Obtiene los datos del usuario autenticado
-        experiencias = Producto.objects.filter(empresa__user=user)
+        experiencias = Producto.objects.filter(empresa__user=user).order_by('-modified')
     else:
         experiencias = Producto.objects.filter(empresa__user=user, tipo__tipo=categoria)        
     
@@ -69,7 +71,6 @@ def experienciasCreate(request):
                     image = img
                 )
             return redirect("experiencias-empresas")
-            success = True
 
         else:
             msg = 'El formulario no es válido, inténtelo nuevamente'
@@ -78,13 +79,46 @@ def experienciasCreate(request):
         
         producto_form = ProductoForm()
 
-    return render(request, "empresas/experiencias-create.html", {"producto_form": producto_form, "msg":msg, "success":success})
+    return render(request, "empresas/experiencias-create.html", {"producto_form": producto_form, "msg":msg, "accion":"register" })
 
 
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])
-def experienciasE(request, id_experiencia):
-    return HttpResponse(f"experiencias editar {id_experiencia}")
+def experienciasEdit(request, id_experiencia):
+    experiencia = Producto.objects.get(id = id_experiencia)
+    imagenes = experiencia.imagen_set.all()
+    msg = None
+
+    if request.method == 'POST':
+        producto_form = ProductoForm(request.POST, instance=experiencia)
+        images = request.FILES.getlist('imagenes')
+        
+        if producto_form.is_valid():
+            producto = producto_form.save()
+            for img in images:
+                imagen = Imagen.objects.create(
+                    experiencia = producto,
+                    image = img
+                )
+            return redirect("experiencias-empresas")
+        
+        else:
+            msg="Datos incorrectos, favor de verificarlos"
+
+    else:
+        producto_form = ProductoForm(instance=experiencia)
+
+    return render(request, "empresas/experiencias-create.html", {"producto_form": producto_form, "imagenes":imagenes, "msg":msg, "accion":"edit" })
+
+@login_required(login_url="/login/")
+@allowed_users(allowed_roles=['empresas',])
+def experiencias_imgDelete(request, id_img):
+    try:
+        imagen = Imagen.objects.get(id=id_img)
+        imagen.delete()
+    except:
+        print('Ocurrió un error al intentar eliminar la imagen')
+    return redirect()
 
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])

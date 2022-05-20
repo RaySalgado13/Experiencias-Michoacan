@@ -17,8 +17,8 @@ class Producto(models.Model):
     fecha_inicio = models.DateTimeField(blank = True, null=True)
     fecha_fin = models.DateTimeField(blank = True, null=True)
     stock = models.IntegerField()
-    empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE, null=True)
-    tipo = models.ForeignKey('Tipo_producto' , on_delete=models.CASCADE)
+    empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT, null=True)
+    tipo = models.ForeignKey('Tipo_producto' , on_delete=models.PROTECT)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -41,7 +41,7 @@ class Empresa(models.Model):
     direccion = models.ForeignKey('Direccion', on_delete=models.CASCADE) 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=True, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.nombre_legal

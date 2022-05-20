@@ -67,27 +67,31 @@
                 </td>
               </tr>
 
-              <div class="modal fade" id="modal-danger-{{empresa.id}}" style="display: none;" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content bg-danger">
-                    <div class="modal-header">
-                      <h4 class="modal-title">¿Está seguro que desea eliminar la cuenta {{empresa.nombre_legal}}?</h4>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                      </button>
+              <form role="form" method="POST" action="">
+                {% csrf_token %}
+                <div class="modal fade" id="modal-danger-{{empresa.id}}" style="display: none;" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content bg-danger">
+                      <div class="modal-header">
+                        <h4 class="modal-title">¿Está seguro que desea eliminar la cuenta {{empresa.nombre_legal}}?</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Esta acción no se puede deshacer</p>
+                      </div>
+                      <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Regresar</button>
+                        <a class="btn btn-danger" href="{% url 'delete_empresa' empresa.id %}">Eliminar</a>
+                      </div>
                     </div>
-                    <div class="modal-body">
-                      <p>Esta acción no se puede deshacer</p>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                      <button type="button" class="btn btn-outline-light" data-dismiss="modal">Regresar</button>
-                      <a class="btn btn-danger" href="{% url 'delete_empresa' empresa.id %}">Eliminar</a>
-                    </div>
+                    <!-- /.modal-content -->
                   </div>
-                  <!-- /.modal-content -->
+                  <!-- /.modal-dialog -->
                 </div>
-                <!-- /.modal-dialog -->
-              </div>
+
+              </form>
 
               {% endfor %}
           </tbody>

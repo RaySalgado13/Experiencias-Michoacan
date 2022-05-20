@@ -10,12 +10,16 @@
 <div class="container-fluid">
 
     <div class="login-logo">
-      <p><b><b>Registrar</b> experiencia</b></p>
+      <p> {% if accion == 'register' %}
+            Registrar
+            {% else %}
+            Editar
+          {% endif %} <b>Experiencia</b></p>
     </div>   
 
     <div class="card">
       <div class="card-body register-card-body">
-        <p class="login-box-msg">Presione <a href="{% url 'dashboard_empresas' %}">aquí</a> para regresar a la página de inicio</p>        
+        <p class="login-box-msg">Presione <a href="{% url 'experiencias-empresas' %}">aquí</a> para regresar a la página de inicio</p>        
 
         <p class="login-box-msg">
             {% if msg %}
@@ -103,14 +107,35 @@
                     </div>
                     <span class="text-error">{{ producto_form.tipo.errors }}</span>
                     
-                    <input type="file" class="form-control" multiple name="imagenes" id="imgs">
-
-                    
-                    <div class="d-flex justify-content-end">
-
-                        <button type="submit" name="experiencias-create" class="btn btn-primary btn-block">Guardar</button>
+                    {% if accion != "register" %}
+                    <h3>Imágenes actuales</h3>
+                    <hr>
+                    <div class="d-flex flex-wrap">
+                        {% for img in imagenes  %}
+                        <div class="card" style="width: 200px;">
+                            <img src="{{img.image.url}}" class="card-img-top" alt="{{img.image.url}}">
+                            <div class="card-body grid_experiencias__card">
+                                <a  href="{% url 'experiencias_img-delete' img.id %}" class="btn btn-danger">Eliminar</a>
+                            </div>
+                        </div>
+                        {%empty%}
+                        <p>El producto no tiene fotos</p>
+                        {% endfor %}  
                     </div>
-
+                        
+                    {% endif %}
+                    <h3>Agregar imágenes</h3>
+                    <hr>
+                    <input type="file" class="form-control mb-3" multiple name="imagenes" id="imgs">
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" 
+                        {% if accion == "register" %}
+                            name="experiencias-create" 
+                            {% else %}
+                            name="experiencias-edit"
+                        {% endif %}
+                        class="btn btn-primary btn-block">Guardar</button>
+                    </div>
                 </div>
             </div>
         </form>
