@@ -1,12 +1,13 @@
 from cmath import exp
 from multiprocessing import context
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from apps.authentication.decorators import allowed_users
 from django.core.paginator import Paginator
 from apps.home.models import Imagen, Producto,Tipo_producto, Empresa
 from .forms import ImagenForm,ProductoForm
+from django.urls import reverse
 # Create your views here.
 
 def index(request):
@@ -115,10 +116,12 @@ def experienciasEdit(request, id_experiencia):
 def experiencias_imgDelete(request, id_img):
     try:
         imagen = Imagen.objects.get(id=id_img)
+        id_experiencia = imagen.experiencia.id
         imagen.delete()
     except:
         print('Ocurrió un error al intentar eliminar la imagen')
-    return redirect()
+    #print(request)
+    return redirect(f'/empresas/experiencias/edit/{id_experiencia}')
 
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])

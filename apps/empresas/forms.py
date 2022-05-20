@@ -29,11 +29,12 @@ class ProductoForm(forms.ModelForm):
                 "class": "form-control"
             }
         ))
-    fecha_inicio = forms.DateTimeField(
-        widget=DateTimePickerInput(
+    fecha_inicio = forms.DateField(
+        widget=forms.DateInput(
             attrs={
                 "placeholder": "",
                 "class": "form-control",
+                "type":"date"
             }
         ))
     
@@ -41,7 +42,8 @@ class ProductoForm(forms.ModelForm):
         widget=forms.DateInput(
             attrs={
                 "placeholder": "",
-                "class": "form-control"
+                "class": "form-control",
+                "type":"date"
             }
         ))
     

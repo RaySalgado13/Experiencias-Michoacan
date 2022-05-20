@@ -30,7 +30,7 @@
     <div class="grid_experiencias">
         {% for experiencia in experiencias  %}         
         <div class="card grid_experiencias__card" style="">
-          <img src="{{experiencia.imagen_set.all.0.image.url}}" class="card-img-top" alt="{{experiencia.imagen_set.all.0.image}}">
+          <img src="{{experiencia.imagen_set.all.0.image.url}}" class="card-img-top" alt="{{experiencia.imagen_set.all.0.image}}" style="object-fit:cover; height:350px">
           <div class="card-body grid_experiencias__card">
             <h5 class="card-title"><b>{{experiencia.nombre}}</b></h5>
             <p class="card-text">{{experiencia.descripcion|slice:"0:40"}}...</p>
