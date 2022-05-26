@@ -16,7 +16,7 @@ class Producto(models.Model):
     precio = models.IntegerField()
     fecha_inicio = models.DateTimeField(blank = True, null=True)
     fecha_fin = models.DateTimeField(blank = True, null=True)
-    stock = models.IntegerField()
+    stock = models.IntegerField(blank = True, null=True)
     empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT, null=True)
     tipo = models.ForeignKey('Tipo_producto' , on_delete=models.PROTECT)
     created = models.DateTimeField(auto_now_add=True)

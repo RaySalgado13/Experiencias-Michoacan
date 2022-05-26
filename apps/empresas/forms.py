@@ -36,7 +36,7 @@ class ProductoForm(forms.ModelForm):
                 "class": "form-control",
                 "type":"date"
             }
-        ))
+        ), required=False)
     
     fecha_fin = forms.DateField(
         widget=forms.DateInput(
@@ -45,7 +45,7 @@ class ProductoForm(forms.ModelForm):
                 "class": "form-control",
                 "type":"date"
             }
-        ))
+        ), required=False)
     
     stock = forms.IntegerField(
         widget=forms.NumberInput(
@@ -53,7 +53,7 @@ class ProductoForm(forms.ModelForm):
                 "placeholder": "Disponibilidad",
                 "class": "form-control"
             }
-        ))
+        ),required=False)
     
     class Meta:
         model = Producto
