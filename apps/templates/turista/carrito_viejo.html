@@ -84,8 +84,9 @@
         </tr>
     </tbody>
 </table>
-<p class="text-right">
-    <a href="#" class="button">Checkout</a>
-</p>
+<form action="{% url 'create-checkout-session' producto.id %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">Checkout</button>
+</form>
 
 {% endblock content %} 

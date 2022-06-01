@@ -8,13 +8,37 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
+from django.views import View
 from apps.home.models import Producto, Imagen
 from django.views.decorators.http import require_POST
+from django.conf import settings
 from .carrito import Carro
 from .forms import CarroAddProcutoForm
 from django.core.paginator import Paginator
 
 from apps.home.models import Producto, Tipo_producto
+
+import stripe
+
+stripe.api_key = "sk_test_51KnukZEnY3WIng0Q1i3sIG8g92yuq8qB4EWFSJoCRxMIKsWazT9wjUW7p7TKr6CrFrVkHKEqO2AsGqDJH59AQeEI0079Qt9ehI"
+
+class CreateCheckoutSessionView(View):
+
+    def post(self, request, *args, **kwargs):
+        price = Producto.objects.get(id=self.kwargs["pk"])
+        checkout_session = stripe.checkout.Session.create(
+            line_items=[
+                {
+                    
+                    'price': price.nombre,
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            success_url=settings.BASE_URL + '/success',
+            cancel_url=settings.BASE_URL + '/cancel',
+        )
+        return redirect(checkout_session.url)
 
 
 

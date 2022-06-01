@@ -25,7 +25,7 @@ class Carro(object):
         if update_cantidad:
             self.carro[producto_id]['cantidad'] = cantidad
         else:
-            self.carro[producto_id]['cantidad'] = cantidad
+            self.carro[producto_id]['cantidad']  += cantidad
         self.save()
 
 

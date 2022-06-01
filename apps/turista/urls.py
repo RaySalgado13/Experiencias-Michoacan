@@ -17,6 +17,8 @@ urlpatterns = [
     path('add/<int:producto_id>/', views.carro_add, name='carro_add'),
     path('eliminar/<int:producto_id>/', views.carro_remover, name='carro_remover'),
     path("checkout/", views.checkout, name='checkout'),
+    path('create-checkout-session/<pk>/',
+views.CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
     
     
     
