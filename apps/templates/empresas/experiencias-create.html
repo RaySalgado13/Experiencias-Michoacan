@@ -37,9 +37,10 @@
             <div class="d-flex flex-wrap justify-content-center p-3" style="gap:10%">
                 <!--Datos del producto-->
                 <div>
+                    {{producto_form.as_p}}
                     <h3>Datos del producto</h3>
                     <hr>
-
+                    
                     <div class="input-group mb-3">
                         {{ producto_form.nombre}}
                         <div class="input-group-append">

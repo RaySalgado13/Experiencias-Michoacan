@@ -17,8 +17,8 @@ urlpatterns = [
     path("experiencias/delete_img/<int:id_img>", views.experiencias_imgDelete, name='experiencias_img-delete'),
     path("experiencias/delete/<int:id_experiencia>", views.experienciasD, name='experiencias-delete'),
     path("reservaciones/", views.reservaciones, name='reservaciones-empresas'),
-    path("reservaciones/edit/<int:id>", views.reservacionesE, name='reservacionesE'),
-    path("reservaciones/eliminar/<int:id>", views.reservacionesD, name='reservacionesD'),
+    path("reservaciones/edit/<int:id>", views.reservacionesE, name='reservaciones-edit'),
+    path("reservaciones/eliminar/<int:id>", views.reservacionesD, name='reservaciones-delete'),
     path("reportes/", views.reportes, name='reportes-empresas'),
     path("correo/", views.correo, name='correo'),
      

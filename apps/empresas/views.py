@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from apps.authentication.decorators import allowed_users
 from django.core.paginator import Paginator
-from apps.home.models import Imagen, Producto,Tipo_producto, Empresa
+from apps.home.models import Imagen, Producto, Reservacion,Tipo_producto, Empresa
 from .forms import ImagenForm,ProductoForm
 from django.urls import reverse
 # Create your views here.
@@ -131,8 +131,10 @@ def experienciasD(request, id_experiencia):
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])
 def reservaciones(request):
+    empresa = Empresa.objects.get(user = request.user)
+    reservaciones = Reservacion.objects.filter(empresa=empresa)
     context = {
-        "user": request.user,
+        "reservaciones": reservaciones,
     }
     return render(request,'empresas/reservaciones.html', context)
 
@@ -143,7 +145,7 @@ def reservacionesE(request):
 
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])
-def reservacionesD(request):
+def reservacionesD(request, id):
     return HttpResponse("reservaciones borrar")
 
 @login_required(login_url="/login/")

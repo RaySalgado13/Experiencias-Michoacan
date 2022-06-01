@@ -1,0 +1,247 @@
+{% extends "layouts/base-turista.html" %}
+{% load static %}
+
+{% block content %}
+
+
+
+<div class="card border ">
+    <div class="card-body bg-dark"><font size="2" color="#FFFFFF">
+        <div class="container table-responsive w-10 h-100">
+            <div class="row">
+                <div class="col-md-3">Articulo</div>
+                <div class="col-md-5 mx-auto">Descrpción</div>
+                <div class="col-md-2">Precio</div>
+                <div class="col-md-2">Total</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% for item in carro %}
+    {% with producto=item.producto %}
+    
+
+        <div style="margin-right: 10pt;">
+          <div style="margin-left: 10pt;">
+    <!--Tabla de carta-->
+        <div class="table-responsive bg-light">
+            <table style="margin-top: auto;" class="table">
+    <!--1 C--> 
+        <tr>
+  <!-------------------------------------------------------------------------------------------------1C O L U M NA---->
+  <td class="w-100" style="margin-top: 4pt;">
+   
+  
+  <div style="margin-left: 10pt;">
+  <div class="row g-0 bg-light position-relative">
+    <div class="rounded col-md-2 mb-md-0 p-0 md-2">
+    <br><br> <img src="img/P-AZUL.jpg" class="w-100 rounded" alt="...">
+    </div>
+    <div class="col-md-9 mx-auto p-4 ps-md-3">
+  
+    <div class="h-auto   ">
+    <div class="w-auto   ">
+  
+    <strong><div width="790" height="380" >{{ producto.nombre }}</div></strong>
+  
+    {{ producto.descripcion }}
+    </div>
+    </div>
+  
+    </div>
+  </div>
+  </div> 
+  
+  
+  </td>
+  
+  <!--------------------------------------------------------- 2 c--------------------------------------------------------------->
+  
+  <td >
+  
+  
+  <div style="margin-top: auto;">
+  <table data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" tabindex="0">
+  
+  
+  
+         <div style="margin-top: 57pt;">        
+            <tr class="mx-auto w-100">
+  <a href="#">
+  
+  
+      <img src="img/BASURA.png"  class="rounded " alt="" width="25" height="29"></a>
+    </tr>
+    </div>
+</table>
+</div>
+    </td>
+      
+  
+</tr>
+</table>
+</div>
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  </div>
+  
+  
+  
+  
+  
+  <!-----------------------------------------------3C------------------------------------------------------------------------>
+  
+  <td >
+  
+  
+  
+  <div style="margin-top: auto;">
+  <table data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" tabindex="0">
+  
+  
+    <tr class="mx-auto w-100">
+         <div style="margin-top: 57pt;">       
+
+    <a href="#">
+    
+    
+        <h9 class="w-30 p-3">${{ item.precio }}</h9></a></div>
+    
+  
+      
+  </tr>
+</table>
+</div>
+  
+  
+  
+ 
+ 
+  
+  </td> 
+  
+  
+  {% endwith %}
+{% endfor %} 
+  
+  
+  <!-- 3 c-->
+  
+   <td>
+  
+  
+  
+  
+  <div  class="card-borderless text-end  "  class="rounded-top" style="width: 17rem;">
+    <div class="rounded card-body bg-dark" >
+        
+  
+    <font size="2" color="#FFFFFF"> <strong><center>
+    <div class="row align-items-start" class="rounded-top">
+        <div class="col" >
+           Total de articulos:
+        </div>
+        <div class="col">
+            {{ carro.obt_precio_total }}
+        </div>
+  </div>
+  <div class="row align-items-start" class="rounded-top">
+        <div class="col">
+        IVA:
+        </div>
+        <div class="col">
+           Column 2
+        </div>
+  </div>
+  <hr>
+  <div class="row align-items-start" class="rounded-top">
+        <div class="col">
+           Toal de IVA:
+        </div>
+        <div class="col">
+           Column 2
+        </div>
+  </div>
+  
+     </div>
+    </div>
+  </div>
+  </font></strong></center>
+        </div>
+  
+  
+  
+        <br>
+  
+  <div  class="card-borderless text-end  "  class="rounded-top" style="width: 17rem;">
+    <div class="rounded card-body bg-dark" >
+        
+  
+    <font size="2" color="#FFFFFF"> <strong><center>
+    <div class="row align-items-start" class="rounded-top">
+        <div class="col" >
+           Nombre:
+        </div>
+        <div class="col">
+        columna2:
+        </div>
+  </div><br>
+  <div class="row align-items-start" class="rounded-top">
+        <div class="col">
+        Correo:
+        </div>
+        <div class="col">
+           Column 2
+        </div>
+  </div>
+  
+  <div class="row align-items-start" class="rounded-top">
+        <div class="col">
+           Dirección:
+        </div>
+        <div class="col">
+           Column 2
+        </div>
+  </div>
+  
+     </div>
+    </div>
+    <hr>
+  </div>
+  </font></strong></center>
+        </div>
+  
+  
+     
+    <div style="margin-top: 10pt;">
+  <center> 
+    <button href="#" style="width: auto;" class="btn btn-primary  btn-pill">Proceder a pago</button>
+  
+  </center>
+  
+  </td>
+
+                  </div>
+  </div>
+  </tr>
+ 
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,156 @@
+{% extends "layouts/base-turista.html" %}
+
+
+
+{% block title %} eCommerce {% endblock %} 
+
+<!-- Element injected in the BODY element -->
+
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/assets/css/styles-turista.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<style> 
+  html {
+      font-family: 'Signika Negative', sans-serif;
+      font-size: 1em;
+  }
+  </style>
+
+  <div class="">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>{{ detalles.nombre }}</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'index_t' %}">Inicio</a></li>
+              <li class="breadcrumb-item active"><a href="{% url 'catalogo' %}">Catalogo</a></li>
+              <li class="breadcrumb-item active">{{ detalles.nombre }}</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card card-solid">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <h3 class="d-inline-block d-sm-none">{{ detalles.nombre }}</h3>
+              <div class="col-12">
+                <img src="{{imagenes.all.0.image.url}}" class="product-image h-100" alt="" style="object-fit:cover; height:350px">
+              </div>
+              <div class="col-12 product-image-thumbs">
+                {% for imagen in imagenes  %} 
+               
+                <div class="product-image-thumb active" ><img src="{{imagen.image.url}}" alt="Product Image"></div>
+                
+                {% endfor %}
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <p>Ubicacion: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+              </svg></p> 
+              <p>{{ detalles.descripcion }}</p>
+                        
+
+                <div class="bg-gray py-2 px-3 mt-4">
+                <h2 class="mb-0">
+                  Precio
+                  ${{ detalles.precio }}
+                </h2>
+                <h4 class="mt-0">
+                </h4>
+              </div>
+
+              <form action="{% url 'carro_add' detalles.id %}" method="post">
+               
+                {% csrf_token %}
+              <div class="mt-4">
+                <div  class="btn btn-primary btn-lg btn-flat">
+                  <i class="fas fa-cart-plus fa-lg mr-2"></i>
+                  <button type="submit" class="btn btn-primary">Añadir</button>
+                </div>
+              </form>
+
+                <div class="btn btn-default btn-lg btn-flat">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                    <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
+                  </svg>
+                  Compra inmediata
+                </div>
+
+              <div class="mt-4 product-share">
+                <a href="#" class="text-gray">
+                  <i class="fab fa-facebook-square fa-2x"></i>
+                </a>
+                <a href="#" class="text-gray">
+                  <i class="fab fa-twitter-square fa-2x"></i>
+                </a>
+                <a href="#" class="text-gray">
+                  <i class="fas fa-envelope-square fa-2x"></i>
+                </a>
+                <a href="#" class="text-gray">
+                  <i class="fas fa-rss-square fa-2x"></i>
+                </a>
+              </div>
+
+            </div>
+          </div>
+          <div class="row mt-4">
+            <nav class="w-100">
+              <div class="nav nav-tabs" id="product-tab" role="tablist">
+                <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Description</a>
+              </div>
+            </nav>
+            <div class="tab-content p-3" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab">Rodeada de acantilados y cerros que parecen protegerla, Maruata se manifiesta con una discreción que seduce casi sin darse cuenta. A las orillas del mar, una serie de palapas ofrecen hamacas y techo para campamentos de viajeros, mayormente extranjeros y jóvenes a mochila, quienes al atardecer se reúnen -aunque no hayan llegado juntos- para contemplar la caída del sol y compartir más tarde la cena. </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+
+{% block javascripts %}
+
+  <!-- jQuery -->
+  <script src="/static/assets/plugins//jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="/static/assets/plugins//bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/static/assets/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="/static/assets/js/demo.js"></script>
+
+{% endblock javascripts %}

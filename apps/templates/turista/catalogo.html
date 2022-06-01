@@ -8,14 +8,14 @@
       </div>
       
     </div>
-    <div class="grid_experiencias">
+    <div class="grid_experiencias mb-5">
         {% for experiencia in experiencias  %}         
         <div class="card grid_experiencias__card" style="">
           <img src="{{experiencia.imagen_set.all.0.image.url}}" class="card-img-top" alt="{{experiencia.imagen_set.all.0.image}}" style="object-fit:cover; height:350px">
           <div class="card-body grid_experiencias__card">
             <h5 class="card-title"><b>{{experiencia.nombre}}</b></h5>
             <p class="card-text">{{experiencia.descripcion|slice:"0:40"}}...</p>
-            <a href="{% url 'detalles' experiencia.id %}" class="btn btn-secondary">detalles</a>
+            <a href="{% url 'detalles' experiencia.id %}" class="btn btn-secondary">Ver más</a>
           </div>
         </div>
         {% empty %}
@@ -28,7 +28,7 @@
         <ul class="pagination justify-content-center">
           {% if experiencias.has_previous %}
             <li class="page-item">
-              <a class="page-link" href="{% url 'catalogo-turista' %}">&laquo</a>
+              <a class="page-link" href="{% url 'catalogo' %}">&laquo</a>
             </li>
             <li class="page-item">
               <a class="page-link" href="?page={{experiencias.previous_page_number}}">Anterior</a>

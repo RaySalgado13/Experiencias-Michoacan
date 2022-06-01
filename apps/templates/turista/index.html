@@ -1,2 +1,192 @@
-{% extends 'layouts/base-turista.html' %}
-{% block title %} Inicio {% endblock %} 
+
+{% block title %}  {% endblock %} 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="static\assets\css\styles2.css">
+    <link rel="stylesheet" href="static\assets\css\turista2.css">
+    <title>Document</title>
+</head>
+<body class="bg-light">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <a class="navbar-brand" href="#">
+                <img src="/static/assets/images/Logo.png" width="80" height="80" alt="">
+              </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <div class=" container-fluid d-flex justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="catalogo/">Catalogo</a>
+                    </li>
+                  </ul>
+              </div>
+            </div>
+          </nav>
+    </header>
+    
+    <main>
+      <main>
+        <!-- _____________________________________Experiencia_Michoacan______________________________________-->
+        <div class="heroe-container">
+          <div class="row">
+            <div class="col">
+              <h2 class="titulo_heroe">Experiencia Michoacán</h2>
+            <p class="texto_heroe"> Experiencia Michoacán te ofrece 
+               una gran variedad <br>de  ofertas en hoteles, viajes, experiencias y eventos. <br> Donde tu decides y armas tu propio viaje en base a diferentes opciones que tenemos para ti 
+              Somos más <br>que una página <br>de viajes </p>
+            </div>
+            <div class="col">
+              <figure>
+                <img class="heroe_img" src="/static/assets/images/viejitos.png"/>
+              </figure>
+            </div>
+        </div>
+      </div>
+        <!-- _____________________________________Hotel______________________________________-->
+       
+        <div class="hotel-container">
+          <div class="row">
+            <div class="col">
+              <h2>Hoteles</h2>
+                <p class="hotel_texto"> Tenemos una gran diversidad de hoteles donde podrás elegir el que más te guste y convengapara hospedarte en tu viaje.</p>
+
+            </div>
+            <div class="col">
+              <figure>
+                <img class="hotel_img" src="/static/assets/images/mansionsolis.png"/>
+              </figure>
+            </div>
+
+            <div class="col">
+              <figure>
+                <img class="hotel_img" src="/static/assets/images/hotel mision Patz.png"/>
+              </figure>
+            </div>
+
+            <div class="col">
+              <figure>
+                <img class="hotel_img" src="/static/assets/images/hotel mision Patz.png"/>
+              </figure>
+            </div>
+
+            <div class="col">
+                <a class="btn btn-primary" href="catalogo/" role="button">Ver mas</a>
+            </div>
+        </div>
+      </div>
+
+ <!-- _____________________________________Viajes______________________________________-->
+
+        <div class="Viajes">
+          <h1 class="titulo_viaje">Viajes</h1>
+        </div>
+
+        <div class="viajes-container">
+          <div class="row">
+            <div class="col">
+             <figure>
+              <img class="hotel_img" src="/static/assets/images/camecuaro.png"/>
+             </figure>
+            </div>
+            <div class="col">
+              <figure>
+                <img class="hotel_img" src="/static/assets/images/paracho.png"/>
+              </figure>
+            </div>
+
+            <div class="col">
+              <figure>
+                <img class="hotel_img" src="/static/assets/images/zamoramichoacan.png"/>
+              </figure>
+            </div>
+
+            <div class="col">
+              <figure>
+                <img class="hotel_img" src="/static/assets/images/zirahuen.png"/>
+              </figure>
+            </div>
+
+        </div>
+      </div>
+      <div class="ver_mas-viajes">
+        <a class="btn btn-primary" href="catalogo/" role="button">Ver mas</a>
+      </div>
+
+      <!-- _____________________________________Viajes______________________________________-->
+
+      <div class="Experiencias">
+        <h1 class="titulo_Experiencias">Experiencias</h1>
+      </div>
+
+      <div class="experiencias-container">
+        <div class="row">
+          <div class="col">
+           <figure>
+            <img class="hotel_img" src="/static/assets/images/tlalpujahua.png"/>
+           </figure>
+          </div>
+          <div class="col">
+            <figure>
+              <img class="hotel_img" src="/static/assets/images/zirahuén kayak.png"/>
+            </figure>
+          </div>
+
+          <div class="col">
+            <figure>
+              <img class="hotel_img" src="/static/assets/images/paricutin.png"/>
+            </figure>
+          </div>
+
+          <div class="col">
+            <figure>
+              <img class="hotel_img" src="/static/assets/images/monarca.png"/>
+            </figure>
+          </div>
+
+         
+      </div>
+    </div>
+    <div class="ver_mas-viajes">
+      <a class="btn btn-primary" href="catalogo/" role="button">Ver mas</a>
+    </div>
+
+
+      </main>
+    </main>
+  </body>
+    <footer>
+            <div class="footer__redes">
+                <p>Síguenos</p>
+                <div class="footer__redes-container">
+                    <a href=""><img class="footer__redes-item" src="/static/assets/images/icons8_Instagram_100px.png" alt=""></a>
+                    <a href=""><img class="footer__redes-item" src="/static/assets/images/icons8_facebook_100px.png" alt=""></a>
+                    <a href=""><img class="footer__redes-item" src="/static/assets/images/icons8_tumblr_100px.png" alt=""></a>
+                    <a href=""><img class="footer__redes-item" src="/static/assets/images/icons8_YouTube_100px.png" alt=""></a>
+                </div>
+                <p>Contáctanos experiencias.michoacan@outlook.com</p>
+            </div>
+            <div class="footer__asociacion">
+                <h5>Asociación de turismo de Morelia</h5>
+                <p>Experiencias Michoacán</p>
+            </div>
+            <div class="footer__avisos">
+                <a href="">Aviso de privacidad</a>
+                <a href="">Términos y condiciones</a>
+            </div>
+        
+    </footer>
+
+
+</html>

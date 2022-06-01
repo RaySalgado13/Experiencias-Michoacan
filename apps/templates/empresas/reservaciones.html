@@ -7,5 +7,75 @@
 
 {% block content %}  
 
+<div class="card-body p-0">
+    <table class="table table-responsive-xl">
+      <thead>
+        <tr>
+          <th scope="col" style="width: 10px">#</th>
+          <th scope="col">Folio</th>
+          <th scope="col">Cliente</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Status</th>
+          <th scope="col">Productos</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>  
+          {% for reservacion in reservaciones %} 
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{reservacion.folio}}</td>
+            <td>{{reservacion.nombre}}</td>  
+            <td>{{reservacion.fecha}}</td>  
+            <td>{{reservacion.status}}</td>    
+            <td>
+                <div class="container">
+                    <ul>
+                        {% for producto in reservacion.producto.all %}
+                            <li>{{producto.nombre}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </td>
+            <td>
+                <div class="container">
+                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger-{{reservacion.id}}">
+                    Eliminar
+                  </button>
+                  <a class="btn btn-warning"  href="{% url 'reservaciones-edit' reservacion.id %}">Editar</a>
+                </div>
+            </td>
+          </tr>
+
+          <form role="form" method="POST" action="">
+            {% csrf_token %}
+            <div class="modal fade" id="modal-danger-{{reservacion.id}}" style="display: none;" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content bg-danger">
+                  <div class="modal-header">
+                    <h4 class="modal-title">¿Está seguro que desea eliminar la reservación {{reservacion.folio}}?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Esta acción no se puede deshacer</p>
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Regresar</button>
+                    <a class="btn btn-danger" href="{% url 'reservaciones-delete' reservacion.id %}">Eliminar</a>
+                  </div>
+                </div>
+                <!-- /.modal-content -->
+              </div>
+              <!-- /.modal-dialog -->
+            </div>
+
+          </form>
+
+          {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
 {% endblock content %}
