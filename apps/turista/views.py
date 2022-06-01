@@ -22,9 +22,8 @@ from django.views.generic import ListView, CreateView, DetailView, TemplateView
 
 from apps.home.models import Producto, Tipo_producto
 
-import stripe
 
-stripe.api_key = "sk_test_51KnukZEnY3WIng0Q1i3sIG8g92yuq8qB4EWFSJoCRxMIKsWazT9wjUW7p7TKr6CrFrVkHKEqO2AsGqDJH59AQeEI0079Qt9ehI"
+
 
 
 
@@ -139,51 +138,7 @@ def carro_detalle(request):
 
 
 
-@csrf_exempt
-def create_checkout_session(request, id):
 
-        request_data = json.loads(request.body)
-        producto = get_object_or_404(Producto, pk=id)
-        product = get_object_or_404(Carro, pk=id)
-
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-
-        checkout_session = stripe.checkout.Session.create(
-        # Customer Email is optional,
-        # It is not safe to accept email directly from the client side
-        
-        payment_method_types=['card'],
-        line_items=[
-            {
-                'price_data': {
-                    'currency': 'usd',
-                    'product_data': {
-                    'name': producto.nombre,
-                    },
-                    'unit_amount': int(product.precio_totald * 100),
-                },
-                'quantity': product.cantidad,
-            }
-        ],
-        mode='payment',
-        success_url=request.build_absolute_uri(
-            reverse('success')
-        ) + "?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url=request.build_absolute_uri(reverse('failed')),
-        )
-
-    # OrderDetail.objects.create(
-    #     customer_email=email,
-    #     product=product, ......
-    # )
-
-        order = Reservacion()
-        order.producto = producto
-        order.status = checkout_session['payment_intent']
-        order.save()
-
-    # return JsonResponse({'data': checkout_session})
-        return JsonResponse({'sessionId': checkout_session.id})
 
 
 def reser_create(request):
@@ -195,9 +150,11 @@ def reser_create(request):
             b = Reservacion.objects.latest('id')
             elme = b.id
             for item in carro:
+               x = item['producto']
                r = Reservacion.objects.get(pk=elme)
                r.status="Pagado"
                r.producto.add(item['producto'])
+               r.empresa = Empresa.objects.get(nombre_legal= str(x.empresa))
                r.save()
                 
             # clear the cart
