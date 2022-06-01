@@ -21,7 +21,13 @@ from apps.home.models import Producto, Tipo_producto
 
 # Create your views here.
 def index(request):
-    return render(request, 'turista/index.html', {})
+    hoteles = Producto.objects.filter(tipo__tipo = "Hoteles").order_by('-modified')[:3]
+    experiencias = Producto.objects.filter(tipo__tipo = "Experiencias").order_by('-modified')[:3]
+    context = {
+        "hoteles":hoteles,
+        "experiencias": experiencias
+    }
+    return render(request, 'turista/index.html', context)
 
 def catalogo(request):
     experiencias = Producto.objects.all()
