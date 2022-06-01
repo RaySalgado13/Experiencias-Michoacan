@@ -10,11 +10,11 @@ from django.conf.urls.static import static
 from apps.home import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),          # Django admin route
-    path("", include("apps.authentication.urls")), # Auth routes - login / register
-    path("home/", include("apps.home.urls"), name='home'),
+    path('admin/', admin.site.urls, name='administrador'),          # Django admin route
     path("", include("apps.turista.urls"), name="inicio"),
-    path("empresas/", include("apps.empresas.urls")),
+    path("", include("apps.authentication.urls"), name="auth"), # Auth routes - login / register
+    path("home/", include("apps.home.urls"), name='home'),
+    path("empresas/", include("apps.empresas.urls"), name="empresas"),
     path("asociacion/", include("apps.asociacion.urls")),
 ]
 

@@ -12,6 +12,9 @@ from apps.home.models import Producto, Imagen
 from django.views.decorators.http import require_POST
 from .carrito import Carro
 from .forms import CarroAddProcutoForm
+from django.core.paginator import Paginator
+
+from apps.home.models import Producto, Tipo_producto
 
 
 
@@ -19,15 +22,27 @@ from .forms import CarroAddProcutoForm
 # Create your views here.
 def index(request):
     return render(request, 'turista/index.html', {})
+
 def catalogo(request):
-    return HttpResponse("catalogo")
+    experiencias = Producto.objects.all().order_by('?')
+    page = request.GET.get('page')
+    paginator = Paginator(experiencias, 8)
+    experiencias = paginator.get_page(page)
+
+    categorias = Tipo_producto.objects.all()
+    context = {
+        "experiencias" : experiencias
+    }
+    return render(request,'turista/catalogo.html',context)
 
 
 def detalle(request,id_producto):
 
+    experiencias = Producto.objects.filter(id=id_producto)
+
     detallesObj = Producto.objects.get(id=id_producto)
 
-    imagenObj = Imagen.objects.filter(experiencia__nombre=str(detallesObj.nombre))
+    imagenes= Imagen.objects.filter(experiencia=detallesObj)
     
 
     request.session['nombre'] = str(detallesObj.nombre)
@@ -47,7 +62,9 @@ def detalle(request,id_producto):
 
         'detalles':detallesObj,
         'carro_producto_form':carro_producto_form,
-        'imagen':imagenObj,
+        'imagenes':imagenes,
+        "experiencias" : experiencias,
+        
         
     }
 
@@ -57,6 +74,8 @@ def detalle(request,id_producto):
     return render(request, 'turista/detalles.html', context=context)
 
 
+
+   
 
 def compra_inmediata(request):
     return HttpResponse("compra inmediata")
@@ -70,7 +89,7 @@ def carrit(request):
         'nombre':detallecok,
         
     }
-    return render(request, 'turista/carrito.html', context=context)
+    return render(request, 'turista/carrito_viejo.html', context=context)
 
 
 def checkout(request):
@@ -86,15 +105,15 @@ def carro_add(request, producto_id):
     carro.add(producto=producto,
                 cantidad= 1,
                  )
-    return redirect('turista:carro')
+    return redirect('carro')
 
 def carro_remover(request, producto_id):
     carro = Carro(request)
     producto = get_object_or_404(Producto, id=producto_id)
     carro.remove(producto)
-    return redirect('turista:carro')
+    return redirect('carro')
 
 def carro_detalle(request):
     carro = Carro(request)
-    return render(request, 'turista/carrito.html', {'carro': carro})
+    return render(request, 'turista/carrito_viejo.html', {'carro': carro})
 

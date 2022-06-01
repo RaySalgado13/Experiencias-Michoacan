@@ -11,7 +11,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import Group
-from .forms import LoginForm, SignUpForm
+from .forms import DireccionForm, EmpresasForm, LoginForm, SignUpForm
 from .decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.decorators import login_required
 from apps.home.models import Empresa, Direccion
@@ -91,39 +91,57 @@ def register_user(request):
                 direccion = direccion,
                 user = user
             )
-
-            print(f"""
-            {user}
-            {direccion}
-            {empresa}
-            """)
-
-            
-            
-            #######################
-            #Add auth backend code#
-            #https://docs.djangoproject.com/es/4.0/topics/auth/default/#topic-authorization
-            #######################
-
             msg = '¡Usuario creado satisfactoriamente!-<a href="/login">Regresar a página de inicio</a>.'
             success = True
             
-            #return redirect("/manage/empresa/")
+            #return redirect("/login")
 
         else:
             msg = 'El formulario no es válido, inténtelo nuevamente'
     else:
         form = SignUpForm()
 
-    return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
+    return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success, "action": "register"})
 
-def validate():
-    return HttpResponse('aaaaaaaaa')
 
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['asociacion'])
-def register_empresa(request):
-    if request.method == 'POST':
-        return HttpResponse(f'registrar Empresa POST')
+def edit_empresa(request, id_empresa):
+    empresa = Empresa.objects.get(id=id_empresa)
+
+    msg = None
+    success = False
+
+
+    if request.method == "POST":
+        form_empresas = EmpresasForm(request.POST,  instance=empresa, prefix='empresas')
+        form_direccion = DireccionForm(request.POST, instance=empresa.direccion, prefix='direccion')
+
+        if form_empresas.is_valid() and form_direccion.is_valid():
+            form_empresas.save()
+            form_direccion.save()
+            
+            return redirect("dashboard_asociacion")
+
+        else:
+            msg="Datos incorrectos, favor de verificarlos"
     else:
-        return HttpResponse(f'registrar Empresa GET')
+        form_empresas = EmpresasForm(instance=empresa, prefix='empresas')
+        form_direccion = DireccionForm(instance=empresa.direccion, prefix='direccion')
+
+    return render(request, "accounts/edit.html", {"form": form_empresas, "form_direccion":form_direccion, "msg": msg, "success": success,"action": "edit"})
+
+@login_required(login_url="/login/")
+@allowed_users(allowed_roles=['asociacion'])
+def delete_empresa(request, id_empresa):
+
+
+    try:
+        empresa = Empresa.objects.get(id=id_empresa)
+        user = empresa.user
+        empresa.delete()
+        user.delete()
+    except:
+        print('Ocurrió un error al intentar eliminar el usuario, existe on delete protect')
+
+    return redirect("dashboard_asociacion")

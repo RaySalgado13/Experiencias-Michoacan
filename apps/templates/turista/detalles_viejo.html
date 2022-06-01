@@ -10,9 +10,12 @@
 
 <h1> {{ detalles.nombre }}</h1>
 <h2> {{ detalles.descripcion }} </h2>
-<img src="https://experienciasmichoacan.s3.amazonaws.com/hotel_mision_patzcuaro.jpg" alt=""  width="500" height="333">
+{% for detalles in object.list  %} 
+
+<img src="{{experiencia.imagen_set.all.0.image.url}}" class="card-img-top" alt="{{experiencia.imagen_set.all.0.image}}" style="object-fit:cover; height:350px">
 
 
+{% endfor %}
 <p class="price">$  {{ detalles.precio }}</p>
 <form action="{% url 'turista:carro_add' detalles.id %}" method="post">
     {{ carro_producto_form }}

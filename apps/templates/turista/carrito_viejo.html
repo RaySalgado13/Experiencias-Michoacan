@@ -24,9 +24,9 @@
 
   <section class="content">
 
-    <table class="bg-gray py-2 px-3 mt-4" >
+    <table class="" >
 
-        <div class="bg-gray py-2 px-3 mt-4">
+        <div class="">
             <thead>
                 <tr>
                     
@@ -47,7 +47,7 @@
 
 
 <h1>Carrito de compra</h1>
-<table class="bg-gray py-2 px-3 mt-4">
+<table class="">
     <thead>
         
         <tr>
@@ -71,7 +71,7 @@
                 </td>
                 <td>{{ producto.nombre }}</td>
                 <td>{{ item.cantidad }}</td>
-                <td><a href="{% url 'turista:carro_remover' producto.id %}">Eliminar</a></td>
+                <td><a href="{% url 'carro_remover' producto.id %}">Eliminar</a></td>
                 <td class="num">${{ item.precio }}</td>
                 <td class="num">${{ item.precio_total }}</td>
             </tr>

@@ -1,16 +1,13 @@
-{% extends "layouts/base-turista.html" %}
-
-
+{% extends "layouts/base.html" %}
 
 {% block title %} eCommerce {% endblock %} 
 
 <!-- Element injected in the BODY element -->
-
+{% block body_class %} sidebar-mini {% endblock body_class %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/assets/css/styles-turista.css">
+
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -22,26 +19,19 @@
 
 {% block content %}
 
-<style> 
-  html {
-      font-family: 'Signika Negative', sans-serif;
-      font-size: 1em;
-  }
-  </style>
-
-  <div class="">
+  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>{{ detalles.nombre }}</h1>
+            <h1>Maruata</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{% url 'catalogo' %}">Inicio</a></li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Catalogo</li>
-              <li class="breadcrumb-item active">{{ detalles.nombre }}</li>
+              <li class="breadcrumb-item active">Maruata</li>
             </ol>
           </div>
         </div>
@@ -58,19 +48,13 @@
             <div class="col-12 col-sm-6">
               <h3 class="d-inline-block d-sm-none">LOWA Men’s Renegade GTX Mid Hiking Boots Review</h3>
               <div class="col-12">
-               
-                 
-                <img src="" class="card-img-top" alt="" style="object-fit:cover; height:350px">
-                
-
-                  
+                <img src="/static/assets/img/maruata.png" class="product-image" alt="Product Image">
               </div>
               <div class="col-12 product-image-thumbs">
-                {% for imagen in imagenes  %} 
-               
-                <div class="product-image-thumb" ><img src="{{imagen.image.url}}" alt="Product Image"></div>
-                
-                {% endfor %}
+                <div class="product-image-thumb active"><img src="/static/assets/img/maruata.png" alt="Product Image"></div>
+                <div class="product-image-thumb" ><img src="/static/assets/img/hotel1.jpg" alt="Product Image"></div>
+                <div class="product-image-thumb" ><img src="/static/assets/img/hotel2.jpg" alt="Product Image"></div>
+                <div class="product-image-thumb" ><img src="/static/assets/img/hotel3.jpg" alt="Product Image"></div>
               </div>
             </div>
             <div class="col-12 col-sm-6">
@@ -78,27 +62,25 @@
                 <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
                 <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
               </svg></p> 
-              <p>{{ detalles.descripcion }}</p>
-                        
+              <p>Duración del viaje: 3 dias desde 17/05/2022 hasta 20/05/2022</p>
+              <p>Servicios que inluye: Hotel y comidas</p>
+              <p>Nombre del hotel: El pejelagarto feliz</p>
+              <p>Empresa a cargo: Viajes mex</p>           
 
                 <div class="bg-gray py-2 px-3 mt-4">
                 <h2 class="mb-0">
-                  ${{ detalles.precio }}
+                  $1250.00
                 </h2>
                 <h4 class="mt-0">
                   <small>Ex Tax: $80.00 </small>
                 </h4>
               </div>
 
-              <form action="{% url 'carro_add' detalles.id %}" method="post">
-               
-                {% csrf_token %}
               <div class="mt-4">
-                <div  class="btn btn-primary btn-lg btn-flat">
+                <div class="btn btn-primary btn-lg btn-flat">
                   <i class="fas fa-cart-plus fa-lg mr-2"></i>
-                  <button type="submit" class="btn btn-primary">Añadir</button>
+                  Add to Cart
                 </div>
-              </form>
 
                 <div class="btn btn-default btn-lg btn-flat">
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
@@ -155,7 +137,6 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-
 {% block javascripts %}
 
   <!-- jQuery -->

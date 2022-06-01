@@ -1,0 +1,62 @@
+{% extends 'layouts/base-turista.html' %}
+{% block title %} Catalogo {% endblock %} 
+
+{% block content %}  
+    <div class="d-flex justify-content-between align-items-center pt-5 pb-5">
+      <div class="m-3">
+        <h1 class="">Experiencias</h1>
+      </div>
+      
+    </div>
+    <div class="grid_experiencias">
+        {% for experiencia in experiencias  %}         
+        <div class="card grid_experiencias__card" style="">
+          <img src="{{experiencia.imagen_set.all.0.image.url}}" class="card-img-top" alt="{{experiencia.imagen_set.all.0.image}}" style="object-fit:cover; height:350px">
+          <div class="card-body grid_experiencias__card">
+            <h5 class="card-title"><b>{{experiencia.nombre}}</b></h5>
+            <p class="card-text">{{experiencia.descripcion|slice:"0:40"}}...</p>
+            <a href="{% url 'detalles' experiencia.id %}" class="btn btn-secondary">detalles</a>
+          </div>
+        </div>
+        {% empty %}
+          <h3 style="display: block;">No hay experiencias registradas</h3>
+      {% endfor %}
+    </div>
+    
+    {% if experiencias.paginator.num_pages > 1 %}
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          {% if experiencias.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="{% url 'catalogo-turista' %}">&laquo</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="?page={{experiencias.previous_page_number}}">Anterior</a>
+            </li>
+          {% endif %}
+
+          {% for p in experiencias.paginator.page_range %}
+              {% if forloop.counter == experiencias.number %}
+                <li class="page-item active"> 
+                  <a class="page-link" href="?page={{forloop.counter}}">{{forloop.counter}}</a>
+                </li> 
+                {% else %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{forloop.counter}}">{{forloop.counter}}</a>
+                </li> 
+              {% endif %}  
+          {% endfor %}
+          
+          {% if experiencias.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{experiencias.next_page_number}}">Siguiente</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="?page={{experiencias.paginator.num_pages}}">&raquo</a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+    
+{% endblock content %}
