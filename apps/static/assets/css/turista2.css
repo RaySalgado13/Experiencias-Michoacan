@@ -1,0 +1,205 @@
+.cart{
+    object-fit: cover;
+    width: 30px;
+    height: 30px;
+}
+<!-- _____________________________________Experiencia_Michoacan______________________________________-->
+
+.heroe{
+    padding-top: 50px;
+    padding-bottom: 50px;
+   border-radius: 15px;
+   margin-left: 50px;
+   width: 500px;  
+   flex-direction: column; 
+}
+
+.titulo_heroe{
+    text-decoration:solid;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 55px;
+     
+    
+}
+
+.texto_heroe{
+    justify-content: center;
+    align-items: center;
+    
+    text-align: center;
+ }
+ .heroe_img{
+    border-radius: 15px;
+}
+
+.viejitos{
+    margin-left: 75px;
+    margin-right: 42px;
+}
+
+
+<!-- _____________________________________Hotel______________________________________-->
+
+.hotel-container{
+    margin-top: 248px;
+}
+.etq-hotel{
+    text-align: center;
+    text-decoration: none;
+    background-color: var(--gris);
+    border-radius: 5px;
+    width: 200px;
+    
+}
+
+.hotel-texto{
+    color:var(--blanco);
+}
+
+.hotel_texto{
+    text-align: center;
+    color: var(--gris)
+}
+
+.Titulo_hotel{
+    text-align: center;
+    color: var(--gris)
+}
+
+.hotel_img{
+  width: 200px;
+  border-radius: 15px;
+}
+
+.col-tiulohotel{
+    margin-left: 75px;
+    text-align: center;
+}
+
+.ver_mas-hotel{
+    text-align: center;
+    justify-content: center;
+}
+
+.ver_mas-hotel{
+    padding: 50%;
+    
+}
+
+<!-- _____________________________________Viajes______________________________________-->
+
+.container-fluid-viajes{
+    text-decoration:solid;
+    text-align: center;
+    padding-top: 30px;
+    border-radius: 15px;
+    background-color: var(--gris);
+    justify-content: center;
+    margin-right: 23px;
+    margin-left: 23px;
+    margin-bottom:146px;
+    margin-top: 248px;
+
+}
+
+.ver_mas-viajes{
+    text-align: center;
+    text-decoration: underline;
+    background-color: var(--gris);
+    border-radius: 5px;
+    width: 112px;
+    height: 34px;
+    margin-top:102px ;
+    margin-left: 56px;
+    
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+}
+.titulo_viaje{
+    color: var(--blanco);
+    padding-bottom: 50px;
+  
+}
+.viajes-container{
+    margin-left:20px ;
+   align-items: center;
+}
+
+.etq-via{
+    text-align: center;
+    text-decoration: none;
+    color: var(--gris);
+    justify-content: center;
+    width: 200px;
+}
+
+<!-- _____________________________________Experiencias______________________________________-->
+.col-experiencia{
+    background-color: var(--gris);
+    padding-top: 50px;
+    padding-bottom: 50px;
+   border-radius: 15px;
+   margin-left: 75px;
+   margin-right: 42px;
+   margin-top: 52px;
+   width: 592px;  
+   height: 499px;
+   flex-direction: column;
+
+}
+
+.col-img{
+
+   border-radius: 15px;
+   
+   margin-right: 42px;
+   margin-top: 52px;
+   width: 592px; 
+}
+
+
+
+
+
+
+
+.footer{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    justify-content: space-between ;
+    background-color: #fff;
+  position: absolute;
+    bottom: 0;
+}
+
+
+
+
+
+
+.container-fluid-experiencia{
+text-align: center;
+padding-top: 178px;
+padding-bottom: 106px;
+}
+
+.titulo_Exp{
+    margin-top: 5000 px;
+}
+
+
+
+
+
+.foot{
+    margin-top: 248px;
+}
+
+
+
+

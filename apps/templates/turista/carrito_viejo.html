@@ -1,9 +1,27 @@
-{% extends "layouts/base.html" %}
+{% extends "layouts/base-turista.html" %}
 {% load static %}
 
 {% block title %} eCommerce {% endblock %} 
 
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+<link rel="stylesheet" href="/static/assets/css/styles-turista.css">
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+{% endblock stylesheets %}
+
 {% block content %}
+<style> 
+    html {
+        font-family: 'Signika Negative', sans-serif;
+        font-size: 1em;
+    }
+</style>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -12,52 +30,22 @@
           <h1>{{ detalles.nombre }}</h1>
         </div>
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Catalogo</li>
-            <li class="breadcrumb-item active">Maruata</li>
-          </ol>
         </div>
       </div>
     </div><!-- /.container-fluid -->
   </section>
 
-  <section class="content">
-
-    <table class="" >
-
-        <div class="">
-            <thead>
-                <tr>
-                    
-                    <th>Imagen</th>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Eliminar</th>
-                    <th>Precio unitario</th>
-                    <th>Precio</th>
-                </tr>
-            </thead>
-        </div>
-    </table>
-
-
-
-  </section>
-
-
 <h1>Carrito de compra</h1>
-<table class="">
+
+<table class="table table-responsive">
     <thead>
-        
         <tr>
             
-            <th>Imagen</th>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Eliminar</th>
-            <th>Precio unitario</th>
-            <th>Precio</th>
+            <th scope="col">Imagen</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Eliminar</th>
+            <th scope="col">Precio</th>
         </tr>
     </thead>
     <tbody>
@@ -65,17 +53,18 @@
             {% with producto=item.producto %}
             <tr>
                 <td>
-                    <a href="{{ producto.get_absolute_url }}">
-                        <img src="https://experienciasmichoacan.s3.amazonaws.com/hotel_mision_patzcuaro.jpg">
-                    </a>
+                    <img class="img img-fluid" style="max-width: 200px;" src="{{producto.imagen_set.all.0.image.url}}">   
                 </td>
-                <td>{{ producto.nombre }}</td>
+                <td> <a href="{% url 'detalles' producto.id %}">{{ producto.nombre }}</a></td>
                 <td>{{ item.cantidad }}</td>
                 <td><a href="{% url 'carro_remover' producto.id %}">Eliminar</a></td>
-                <td class="num">${{ item.precio }}</td>
                 <td class="num">${{ item.precio_total }}</td>
             </tr>
-            {% endwith %}
+            {% endwith %}     
+            {% empty %}
+                 <h5 class="px-2">No tienes articulos en el carrito</h5>
+
+            
         {% endfor %}
         <tr class="total">
             <td>Total</td>
@@ -84,9 +73,58 @@
         </tr>
     </tbody>
 </table>
-<form action="{% url 'create-checkout-session' producto.id %}" method="POST">
-    {% csrf_token %}
-    <button type="submit">Checkout</button>
-</form>
 
+
+<div class="d-flex px-3">
+    <form action="{% url 'checkout'  %}" method="post">
+               
+        {% csrf_token %}
+    <button class="btn btn-primary" type="submit" id="checkout-button">
+        Checkout
+    </button>
+    </form>
+
+</div>
 {% endblock content %} 
+
+<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript">
+    // Create an instance of the Stripe object with your publishable API key
+    var stripe = Stripe('{{ stripe_publishable_key }}');
+    var checkoutButton = document.getElementById('checkout-button');
+
+    checkoutButton.addEventListener('click', function () {
+
+        var email = document.getElementById('email').value;
+        if (email.length == 0) {
+            alert("Please enter your email address.");
+            return;
+        }
+
+        // Create a new Checkout Session using the server-side endpoint you
+        // created in step 3.
+        fetch("{% url 'api_checkout_session' id=object.id %}", {
+            method: 'POST',
+            body: JSON.stringify(
+                { email: email }
+            )
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (session) {
+                return stripe.redirectToCheckout({ sessionId: session.sessionId });
+            })
+            .then(function (result) {
+                // If `redirectToCheckout` fails due to a browser or network
+                // error, you should display the localized error message to your
+                // customer using `error.message`.
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            })
+            .catch(function (error) {
+                console.error('Error:', error);
+            });
+    });
+</script>

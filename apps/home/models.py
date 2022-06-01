@@ -72,15 +72,17 @@ class Tipo_producto(models.Model):
     
 
 class Reservacion(models.Model):
-    folio = models.CharField(max_length=250)
+    folio = models.CharField(max_length=250,blank = True)
     nombre = models.CharField(max_length=100)
     email = models.EmailField(max_length=250, blank = True)
     telefono = models.CharField(max_length=10, blank = True)
     fecha = models.DateTimeField(auto_now = True)
-    status = models.CharField(max_length=50)
-    producto = models.ManyToManyField(Producto)
+    status = models.CharField(max_length=50, blank = True)
+    producto = models.ManyToManyField(Producto, blank = True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT, null=True, blank = True)
+
 
     def __str__(self) -> str:
         return self.folio

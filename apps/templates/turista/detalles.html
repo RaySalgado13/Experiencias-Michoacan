@@ -39,8 +39,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{% url 'catalogo' %}">Inicio</a></li>
-              <li class="breadcrumb-item active">Catalogo</li>
+              <li class="breadcrumb-item"><a href="{% url 'index_t' %}">Inicio</a></li>
+              <li class="breadcrumb-item active"><a href="{% url 'catalogo' %}">Catalogo</a></li>
               <li class="breadcrumb-item active">{{ detalles.nombre }}</li>
             </ol>
           </div>
@@ -56,19 +56,14 @@
         <div class="card-body">
           <div class="row">
             <div class="col-12 col-sm-6">
-              <h3 class="d-inline-block d-sm-none">LOWA Men’s Renegade GTX Mid Hiking Boots Review</h3>
+              <h3 class="d-inline-block d-sm-none">{{ detalles.nombre }}</h3>
               <div class="col-12">
-               
-                 
-                <img src="" class="card-img-top" alt="" style="object-fit:cover; height:350px">
-                
-
-                  
+                <img src="{{imagenes.all.0.image.url}}" class="product-image h-100" alt="" style="object-fit:cover; height:350px">
               </div>
               <div class="col-12 product-image-thumbs">
                 {% for imagen in imagenes  %} 
                
-                <div class="product-image-thumb" ><img src="{{imagen.image.url}}" alt="Product Image"></div>
+                <div class="product-image-thumb active" ><img src="{{imagen.image.url}}" alt="Product Image"></div>
                 
                 {% endfor %}
               </div>
@@ -83,10 +78,10 @@
 
                 <div class="bg-gray py-2 px-3 mt-4">
                 <h2 class="mb-0">
+                  Precio
                   ${{ detalles.precio }}
                 </h2>
                 <h4 class="mt-0">
-                  <small>Ex Tax: $80.00 </small>
                 </h4>
               </div>
 
@@ -106,15 +101,6 @@
                   </svg>
                   Compra inmediata
                 </div>
-
-                <div class="mt-4">
-                  <div class="btn btn-primary btn-lg btn-flat">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5z"/>
-                    </svg>
-                    Regresar
-                  </div>
-              </div>
 
               <div class="mt-4 product-share">
                 <a href="#" class="text-gray">
