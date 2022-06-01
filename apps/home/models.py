@@ -81,6 +81,8 @@ class Reservacion(models.Model):
     producto = models.ManyToManyField(Producto)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT, null=True)
+
 
     def __str__(self) -> str:
         return self.folio

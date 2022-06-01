@@ -24,7 +24,7 @@ def index(request):
     return render(request, 'turista/index.html', {})
 
 def catalogo(request):
-    experiencias = Producto.objects.all().order_by('?')
+    experiencias = Producto.objects.all()
     page = request.GET.get('page')
     paginator = Paginator(experiencias, 8)
     experiencias = paginator.get_page(page)
