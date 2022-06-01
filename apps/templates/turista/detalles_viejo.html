@@ -1,0 +1,24 @@
+{% extends 'layouts/base-turista.html' %}
+{% block content %}
+      
+    
+
+
+
+<h1>Detalles</h1> 
+
+
+<h1> {{ detalles.nombre }}</h1>
+<h2> {{ detalles.descripcion }} </h2>
+<img src="https://experienciasmichoacan.s3.amazonaws.com/hotel_mision_patzcuaro.jpg" alt=""  width="500" height="333">
+
+
+<p class="price">$  {{ detalles.precio }}</p>
+<form action="{% url 'turista:carro_add' detalles.id %}" method="post">
+    {{ carro_producto_form }}
+    {% csrf_token %}
+    <input type="submit" value="Añadir">
+</form>
+
+
+{% endblock content %} 

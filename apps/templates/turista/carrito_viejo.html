@@ -1,0 +1,91 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} eCommerce {% endblock %} 
+
+{% block content %}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>{{ detalles.nombre }}</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Catalogo</li>
+            <li class="breadcrumb-item active">Maruata</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <section class="content">
+
+    <table class="bg-gray py-2 px-3 mt-4" >
+
+        <div class="bg-gray py-2 px-3 mt-4">
+            <thead>
+                <tr>
+                    
+                    <th>Imagen</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Eliminar</th>
+                    <th>Precio unitario</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+        </div>
+    </table>
+
+
+
+  </section>
+
+
+<h1>Carrito de compra</h1>
+<table class="bg-gray py-2 px-3 mt-4">
+    <thead>
+        
+        <tr>
+            
+            <th>Imagen</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Eliminar</th>
+            <th>Precio unitario</th>
+            <th>Precio</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in carro %}
+            {% with producto=item.producto %}
+            <tr>
+                <td>
+                    <a href="{{ producto.get_absolute_url }}">
+                        <img src="https://experienciasmichoacan.s3.amazonaws.com/hotel_mision_patzcuaro.jpg">
+                    </a>
+                </td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ item.cantidad }}</td>
+                <td><a href="{% url 'turista:carro_remover' producto.id %}">Eliminar</a></td>
+                <td class="num">${{ item.precio }}</td>
+                <td class="num">${{ item.precio_total }}</td>
+            </tr>
+            {% endwith %}
+        {% endfor %}
+        <tr class="total">
+            <td>Total</td>
+            <td colspan="4"></td>
+            <td class="num">${{ carro.obt_precio_total }}</td>
+        </tr>
+    </tbody>
+</table>
+<p class="text-right">
+    <a href="#" class="button">Checkout</a>
+</p>
+
+{% endblock content %} 
