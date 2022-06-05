@@ -49,12 +49,14 @@
                 <div>
                   <h3>Datos de Usuario</h3>
                   <hr>
+                  <div>Campo obligatorio <span class="mx-1" style="color: red;">*</span></div>
                   <div class="input-group mb-3">
                     {{ form.username }}
                     <div class="input-group-append">
                       <div class="input-group-text">
                         <span class="fas fa-user"></span>
                       </div>
+                      <span class="mx-1" style="color: red;">*</span>
                     </div>
                   </div>
                   <span class="text-error">{{ form.username.errors }}</span>
@@ -65,6 +67,7 @@
                       <div class="input-group-text">
                         <span class="fas fa-envelope"></span>
                       </div>
+                      <span class="mx-1" style="color: red;">*</span>
                     </div>
                   </div>
                   <span class="text-error">{{ form.email.errors }}</span>
@@ -75,6 +78,7 @@
                       <div class="input-group-text">
                         <span class="fas fa-lock"></span>
                       </div>
+                      <span class="mx-1" style="color: red;">*</span>
                     </div>
                   </div>
                   <span class="text-error">{{ form.password1.errors }}</span>
@@ -85,6 +89,7 @@
                       <div class="input-group-text">
                         <span class="fas fa-lock"></span>
                       </div>
+                      <span class="mx-1" style="color: red;">*</span>
                     </div>
                   </div>
                   <span class="text-error">{{ form.password2.errors }}</span>
@@ -101,6 +106,7 @@
                 <div class="input-group-append">
                   <div class="input-group-text">
                   </div>
+                  <span class="mx-1" style="color: red;">*</span>
                 </div>
               </div>
               <span class="text-error">{{ form.nombre_legal.errors }}</span>
@@ -119,6 +125,7 @@
                 <div class="input-group-append">
                   <div class="input-group-text">
                   </div>
+                  <span class="mx-1" style="color: red;">*</span>
                 </div>
               </div>
               <span class="text-error">{{ form.rfc.errors }}</span>
@@ -128,6 +135,7 @@
                 <div class="input-group-append">
                   <div class="input-group-text">
                   </div>
+                  <span class="mx-1" style="color: red;">*</span>
                 </div>
               </div>
               <span class="text-error">{{ form.telefono.errors }}</span>
@@ -137,6 +145,7 @@
                 <div class="input-group-append">
                   <div class="input-group-text">
                   </div>
+                  <span class="mx-1" style="color: red;">*</span>
                 </div>
               </div>
               <span class="text-error">{{ form.representante.errors }}</span>
@@ -149,6 +158,7 @@
                 <div class="input-group-append">
                   <div class="input-group-text">
                   </div>
+                  <span class="mx-1" style="color: red;">*</span>
                 </div>
               </div>
               <span class="text-error">{{ form.calle.errors }}</span>
@@ -168,6 +178,7 @@
                   <div class="input-group-append">
                     <div class="input-group-text">
                     </div>
+                    <span class="mx-1" style="color: red;">*</span>
                   </div>
                 </div>
                 <span class="text-error">{{ form.numero_exterior.errors }}</span>
@@ -180,6 +191,7 @@
                   <div class="input-group-append">
                     <div class="input-group-text">
                     </div>
+                    <span class="mx-1" style="color: red;">*</span>
                   </div>
               </div>
               <span class="text-error">{{ form.colonia.errors }}</span>
@@ -189,6 +201,7 @@
                   <div class="input-group-append">
                     <div class="input-group-text">
                     </div>
+                    <span class="mx-1" style="color: red;">*</span>
                   </div>
                 </div>
                 <span class="text-error">{{ form.cp.errors }}</span>
@@ -201,6 +214,7 @@
                 <div class="input-group-append">
                   <div class="input-group-text">
                   </div>
+                  <span class="mx-1" style="color: red;">*</span>
                 </div>
               </div>
               <span class="text-error">{{ form.ciudad.errors }}</span>
