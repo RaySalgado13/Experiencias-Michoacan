@@ -82,6 +82,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
             ],
         },
     },
@@ -157,3 +158,7 @@ AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
 #############################################################
 
 CARRO_SESSION_ID = 'carro'
+
+
+STRIPE_PUBLIC_KEY = "pk_test_51KnukZEnY3WIng0QiWdqwLR7kJzV1SpP5eI2yexzxxXD882oYRkQ0nMbaplCdp7lCmTx8WJ12CaPddDR87iawDgw00VxUrzgvc"
+STRIPE_SECRET_KEY =  "sk_test_51KnukZEnY3WIng0Q1i3sIG8g92yuq8qB4EWFSJoCRxMIKsWazT9wjUW7p7TKr6CrFrVkHKEqO2AsGqDJH59AQeEI0079Qt9ehI"

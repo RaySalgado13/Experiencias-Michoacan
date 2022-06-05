@@ -25,7 +25,7 @@ class Carro(object):
         if update_cantidad:
             self.carro[producto_id]['cantidad'] = cantidad
         else:
-            self.carro[producto_id]['cantidad'] = cantidad
+            self.carro[producto_id]['cantidad']  += cantidad
         self.save()
 
 
@@ -66,5 +66,5 @@ class Carro(object):
 
     def limpia(self):
         #limpia el carro de la sesion
-        del self.session[settings.CART_SESSION_ID]
+        del self.session[settings.CARRO_SESSION_ID]
         self.save()

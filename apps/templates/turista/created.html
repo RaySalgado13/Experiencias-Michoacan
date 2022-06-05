@@ -1,0 +1,22 @@
+{% extends "layouts/base-turista.html" %}
+{% load static %}
+
+{% block title %} Gracias {% endblock %} 
+
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+<link rel="stylesheet" href="/static/assets/css/styles-turista.css">
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+{% endblock stylesheets %}
+
+
+{% block content %}
+<h1>Thank you</h1>
+<p>Your order has been successfully completed. Your order number is
+<strong>{{ order.id }}</strong>.</p>
+{% endblock %}
