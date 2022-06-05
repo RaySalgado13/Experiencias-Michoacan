@@ -25,6 +25,11 @@ from apps.home.models import Producto, Tipo_producto
 
 
 
+
+
+
+
+
 # Create your views here.
 def index(request):
     hoteles = Producto.objects.filter(tipo__tipo = "Hoteles").order_by('-modified')[:3]
@@ -141,6 +146,8 @@ def carro_detalle(request):
 
 
 
+
+
 def reser_create(request):
     carro = Carro(request)
     if request.method == 'POST':
@@ -150,11 +157,11 @@ def reser_create(request):
             b = Reservacion.objects.latest('id')
             elme = b.id
             for item in carro:
-               x = item['producto'] 
+               x = item['producto']
                r = Reservacion.objects.get(pk=elme)
                r.status="Pagado"
                r.producto.add(item['producto'])
-               r.empresa = Empresa.objects.get(nombre_legal = str(x.empresa))
+               r.empresa = Empresa.objects.get(nombre_legal= str(x.empresa))
                r.save()
                 
             # clear the cart
