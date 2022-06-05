@@ -9,7 +9,7 @@
 
         {% for grupo in request.user.groups.all %}
             {% if grupo.name == "empresas" %}
-              <a href="{% url 'dashboard_empresas' %}" class="nav-link">Inicio</a>
+              <a href="{% url 'empresas' %}" class="nav-link">Bienvenida</a>
               {% else %}
               <a href="{% url 'dashboard_asociacion' %}" class="nav-link">Inicio</a>
             {% endif %}

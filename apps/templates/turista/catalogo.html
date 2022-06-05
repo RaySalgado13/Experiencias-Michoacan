@@ -3,10 +3,27 @@
 
 {% block content %}  
     <div class="d-flex justify-content-between align-items-center pt-5 pb-5">
+
+
       <div class="m-3">
-        <h1 class="">Experiencias</h1>
+        <h1 class="">Catálogo</h1>
+      </div>
+      <div class="d-flex flex-wrap align-items-center m-3" style="gap: 10px;">
+        <div class="dropdown">
+          <a class="btn btn-primary btn-lg dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+            Filtrar
+          </a>
+        
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="{% url 'catalogo'%}">Todos</a>
+            {% for categoria in categorias  %}
+              <a class="dropdown-item" href="{% url 'catalogo'%}?categoria={{categoria}} ">{{categoria}}</a>
+            {% endfor %}
+          </div>
+        </div>
       </div>
       
+
     </div>
     <div class="grid_experiencias mb-5">
         {% for experiencia in experiencias  %}         
@@ -15,7 +32,7 @@
           <div class="card-body grid_experiencias__card">
             <h5 class="card-title"><b>{{experiencia.nombre}}</b></h5>
             <p class="card-text">{{experiencia.descripcion|slice:"0:40"}}...</p>
-            <a href="{% url 'detalles' experiencia.id %}" class="btn btn-secondary">Ver más</a>
+            <a href="{% url 'detalles' experiencia.id %}" class="btn btn-secondary btn-lg">Ver más</a>
           </div>
         </div>
         {% empty %}
@@ -28,10 +45,74 @@
         <ul class="pagination justify-content-center">
           {% if experiencias.has_previous %}
             <li class="page-item">
-              <a class="page-link" href="{% url 'catalogo' %}">&laquo</a>
+              {% if request.GET.categoria %}
+                  <a class="page-link" href="{% url 'catalogo'%}?categoria={{request.GET.categoria}}">&laquo</a>
+                  {% else %} 
+                    <a class="page-link" href="{% url 'catalogo'%}">&laquo</a>
+              {% endif %}
             </li>
             <li class="page-item">
-              <a class="page-link" href="?page={{experiencias.previous_page_number}}">Anterior</a>
+              {% if request.GET.categoria %}
+                  <a class="page-link" href="?page={{experiencias.previous_page_number}}&categoria={{request.GET.categoria}}">Anterior</a>
+                  {% else %} 
+                    <a class="page-link" href="?page={{experiencias.previous_page_number}}">Anterior</a>
+              {% endif %}
+            </li>
+          {% endif %}
+
+          {% for p in experiencias.paginator.page_range %}
+              {% if forloop.counter == experiencias.number %}
+                <li class="page-item active"> 
+                  {% if request.GET.categoria %}
+                    <a class="page-link" href="?page={{forloop.counter}}&categoria={{request.GET.categoria}}">{{forloop.counter}}</a>
+                    {% else %}
+                      <a class="page-link" href="?page={{forloop.counter}}">{{forloop.counter}}</a>
+                  {% endif %}
+                </li> 
+                {% else %}
+                <li class="page-item">
+                  {% if request.GET.categoria %}
+                    <a class="page-link" href="?page={{forloop.counter}}&categoria={{request.GET.categoria}}">{{forloop.counter}}</a>
+                    {% else %}
+                      <a class="page-link" href="?page={{forloop.counter}}">{{forloop.counter}}</a>
+                  {% endif %}
+                </li> 
+              {% endif %}  
+          {% endfor %}
+          
+          {% if experiencias.has_next %}
+            <li class="page-item">
+              {% if request.GET.categoria %}
+                  <a class="page-link" href="?page={{experiencias.next_page_number}}&categoria={{request.GET.categoria}}">Siguiente</a>
+                  {% else %} 
+                    <a class="page-link" href="?page={{experiencias.next_page_number}}">Siguiente</a>
+              {% endif %}
+              
+            </li>
+            <li class="page-item">
+              {% if request.GET.categoria %}
+                    <a class="page-link" href="?page={{experiencias.paginator.num_pages}}&categoria={{request.GET.categoria}}">&raquo</a>
+                  {% else %} 
+                  <a class="page-link" href="?page={{experiencias.paginator.num_pages}}">&raquo</a>
+              {% endif %}
+              
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+
+    <!--
+    {% if experiencias.paginator.num_pages > 1 %}
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          {% if experiencias.has_previous %}
+            <li class="page-item">
+              {% if request.GET.categoria %}
+              <a class="page-link" href="{% url 'catalogo'%}?categoria={{request.GET.categoria}}">&laquo</a>
+              {% else %} 
+                <a class="page-link" href="{% url 'catalogo'%}">&laquo</a>
+              {% endif %}
             </li>
           {% endif %}
 
@@ -58,5 +139,6 @@
         </ul>
       </nav>
     {% endif %}
+    -->
     
 {% endblock content %}

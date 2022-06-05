@@ -42,14 +42,21 @@ def index(request):
     return render(request, 'turista/index.html', context)
 
 def catalogo(request):
-    experiencias = Producto.objects.all()
+    categoria = request.GET.get('categoria')
+    if categoria == None:
+        experiencias = Producto.objects.order_by('-modified')
+    else:
+        experiencias = Producto.objects.filter(tipo__tipo=categoria)
+    
     page = request.GET.get('page')
+
     paginator = Paginator(experiencias, 8)
     experiencias = paginator.get_page(page)
 
     categorias = Tipo_producto.objects.all()
     context = {
-        "experiencias" : experiencias
+        "experiencias" : experiencias,
+        "categorias": categorias
     }
     return render(request,'turista/catalogo.html',context)
 
