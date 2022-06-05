@@ -1,4 +1,5 @@
 from itertools import product
+from tkinter import EW
 from django.views.decorators.csrf import csrf_exempt
 import json
 from multiprocessing import context
@@ -167,3 +168,10 @@ def reser_create(request):
     return render(request,
                   'turista/create.html',
                     {'cart':carro, 'form': form})
+
+def reser_cance(request):
+    if request.method == 'POST':
+        b = Reservacion.objects.latest('id')
+        b.status = "Cancelado"
+        b.save()
+        return render (request, 'turista/cancel.html')

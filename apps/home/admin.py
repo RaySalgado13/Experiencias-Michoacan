@@ -4,7 +4,7 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from django.contrib import admin
-from .models import Producto, Empresa, Direccion, Tipo_producto,Imagen,Reservacion,Tipo_Reporte,Reporte
+from .models import Producto, Empresa, Direccion, Tipo_producto,Imagen,Reservacion,Tipo_Reporte,Reporte, Paquete
 
 # Register your models here.
 class ImagenAdmin(admin.ModelAdmin):
@@ -22,3 +22,4 @@ admin.site.register(Reservacion, ReservacionAdmin)
 admin.site.register(Tipo_Reporte)
 admin.site.register(Reporte)
 admin.site.register(Direccion)
+admin.site.register(Paquete)

@@ -17,13 +17,6 @@
 
 {% block content %}
 <h1>Thank you</h1>
-<p>Your order has been successfully completed. Your order number is
-<strong>{{ order.id }}</strong>.</p>
-<form action="{% url 'cancel'  %}" method="post">
-               
-    {% csrf_token %}
-<button class="btn btn-primary" type="submit" id="checkout-button">
-    Cancelar
-</button>
-</form>
+<p>Tu orden se a cancelado
+
 {% endblock %}

@@ -107,6 +107,17 @@ class Tipo_Reporte(models.Model):
 
     def __str__(self):
         return self.tipo
+
+class Paquete(models.Model):
+    empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT, null=True)
+    nombre = models.CharField(max_length=100)
+    precio = models.IntegerField(default=0)
+    fecha_inicio = models.DateTimeField(blank = True, null=True)
+    fecha_fin = models.DateTimeField(blank = True, null=True)
+    stock = models.IntegerField(blank = True, null=True)
+    producto = models.ManyToManyField(Producto, blank = True)
     
+    def __str__(self):
+        return self.nombre
 
 

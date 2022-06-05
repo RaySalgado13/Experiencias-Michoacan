@@ -5,8 +5,8 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from apps.authentication.decorators import allowed_users
 from django.core.paginator import Paginator
-from apps.home.models import Imagen, Producto, Reservacion,Tipo_producto, Empresa
-from .forms import ImagenForm,ProductoForm
+from apps.home.models import Imagen, Paquete, Producto, Reservacion,Tipo_producto, Empresa
+from .forms import ImagenForm, PaqueteForm,ProductoForm, ReservacionForm
 from django.urls import reverse
 # Create your views here.
 
@@ -126,7 +126,10 @@ def experiencias_imgDelete(request, id_img):
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])
 def experienciasD(request, id_experiencia):
-    return HttpResponse(f"experiencias borrar {id_experiencia}")
+    experiencia = Producto.objects.get(id = id_experiencia)
+    experiencia.delete()
+
+    return redirect(f"/empresas/experiencias/")
 
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])
@@ -140,13 +143,34 @@ def reservaciones(request):
 
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])
-def reservacionesE(request):
-    return HttpResponse("reservaciones editar")
+def reservacionesE(request, id_reservacion):
+    reservaciones = Reservacion.objects.get(id = id_reservacion)
+    msg = None
+
+    if request.method == 'POST':
+        reservacion_form = ReservacionForm(request.POST, instance=reservaciones)
+
+        if reservacion_form.is_valid():
+            reservacion = reservacion_form.save()
+            return redirect("experiencias-empresas")
+
+        else:
+            msg="Datos incorrectos, favor de verificarlos"
+
+    else:
+        reservacion_form = ReservacionForm(instance=reservaciones)
+
+    return render(request, "empresas/reservaciones-edit.html", {'reservacion_form': reservacion_form, "msg":msg, "accion":"edit"})
 
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])
-def reservacionesD(request, id):
-    return HttpResponse("reservaciones borrar")
+def reservacionesD(request, id_reservacion):
+    
+    reservacion = Reservacion.objects.get(id = id_reservacion)
+    reservacion.delete()
+
+    return redirect(f"/empresas/experiencias/")
+
 
 @login_required(login_url="/login/")
 @allowed_users(allowed_roles=['empresas',])
@@ -164,3 +188,84 @@ def correo(request):
     }
     return render(request,'empresas/mailbox.html', context)
 
+@login_required(login_url="/login/")
+@allowed_users(allowed_roles=['empresas',])
+def paquetes(request):
+    user = request.user
+    page = request.GET.get('page')
+    paquetes = Paquete.objects.filter(empresa__user=user).order_by('-nombre')
+    
+    paginator = Paginator(paquetes, 8)
+    paquetes = paginator.get_page(page)
+
+
+    context = {
+        "user": request.user,
+        "paquetes": paquetes,
+    }
+
+    
+    return render(request,'empresas/paquetes.html', context)
+
+@login_required(login_url="/login/")
+@allowed_users(allowed_roles=['empresas',])
+def paquetesCreate(request):
+    msg = None
+    success = False
+
+    empresa = Empresa.objects.get(user = request.user)
+
+    if request.method == 'POST':
+        
+        paquete_form = PaqueteForm( empresa.id,request.POST)
+        
+   
+        if paquete_form.is_valid():
+            paquete = paquete_form.save()   
+            paquete.empresa = empresa
+            paquete.save()
+            
+            return redirect("experiencias-paquetes")
+
+        else:
+            msg = 'El paquete no es válido, inténtelo nuevamente'
+    else:
+        
+        paquete_form = PaqueteForm(empresa.id)
+    
+    return render(request, "empresas/paquetes-create.html", {"paquete_form": paquete_form, "msg":msg, "accion":"register" })
+
+@login_required(login_url="/login/")
+@allowed_users(allowed_roles=['empresas',])
+def paquetesEdit(request, id_paquete):
+    
+    empresa = Empresa.objects.get(user = request.user)
+    paquetes = Paquete.objects.get(id = id_paquete)
+    msg = None
+
+    if request.method == 'POST':
+        paquete_form = PaqueteForm(empresa.id,request.POST, instance=paquetes)
+
+        if paquete_form.is_valid():
+            paquetes = paquete_form.save()
+            return redirect("experiencias-paquetes")
+
+        else:
+            msg="Datos incorrectos, favor de verificarlos"
+
+    else:
+        
+        paquete_form = PaqueteForm(empresa.id, instance=paquetes)
+
+    return render(request, "empresas/paquetes-create.html", {'paquete_form': paquete_form, "msg":msg, "accion":"edit"})
+
+    
+    return HttpResponse("crear")
+
+@login_required(login_url="/login/")
+@allowed_users(allowed_roles=['empresas',])
+def paquetesD(request, id_paquete):
+   
+
+    
+    return HttpResponse("crear")

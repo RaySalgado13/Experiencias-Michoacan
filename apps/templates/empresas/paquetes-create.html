@@ -14,7 +14,7 @@
             Registrar
             {% else %}
             Editar
-          {% endif %} <b>Experiencia</b></p>
+          {% endif %} <b>Paquete</b></p>
     </div>   
 
     <div class="card">
@@ -26,7 +26,7 @@
                 <span class="text-danger">{{ msg | safe }}</span>
             {% else %}
             <span>
-                Ingrese los datos del producto
+                Ingrese los datos del paquete
             </span>
             {% endif %}
         </p>
@@ -38,77 +38,69 @@
                 <!--Datos del producto-->
                 <div>
                     
-                    <h3>Datos del producto</h3>
+                    <h3>Datos del paquete</h3>
                     <hr>
                     
                     <div class="input-group mb-3">
-                        {{ producto_form.nombre}}
+                        {{ paquete_form.nombre}}
                         <div class="input-group-append">
                         <div class="input-group-text">
                         </div>
                         </div>
                     </div>
-                    <span class="text-error">{{ producto_form.nombre.errors }}</span>
-
-                    <div class="input-group mb-3">
-                        {{ producto_form.descripcion }}
-                        <div class="input-group-append">
-                        <div class="input-group-text">
-                        </div>
-                        </div>
-                    </div>
-                    <span class="text-error">{{ producto_form.descripcion.errors }}</span>
+                    <span class="text-error">{{ paquete_form.nombre.errors }}</span>
 
                     <div class="input-group mb-3 w-50">
-                        {{ producto_form.precio }}
+                        {{ paquete_form.precio }}
                         <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-dollar-sign"></span>
                         </div>
                         </div>
                     </div>
-                    <span class="text-error">{{ producto_form.precio.errors }}</span>
+                    <span class="text-error">{{ paquete_form.precio.errors }}</span>
                     
                     <div class="d-flex flex-wrap">
                         <div class="input-group mb-3 w-50">
-                            {{ producto_form.fecha_inicio }}
+                            {{ paquete_form.fecha_inicio }}
                             <div class="input-group-append">
                             <div class="input-group-text">
                             </div>
                             </div>
                         </div>
-                        <span class="text-error">{{ producto_form.fecha_inicio.errors }}</span>
+                        <span class="text-error">{{ paquete_form.fecha_inicio.errors }}</span>
                     
                         <div class="input-group mb-3 w-50">
-                            {{ producto_form.fecha_fin }}
+                            {{ paquete_form.fecha_fin }}
                             <div class="input-group-append">
                             <div class="input-group-text">
                             </div>
                             </div>
                         </div>
-                        <span class="text-error">{{ producto_form.fecha_fin.errors }}</span>
+                        <span class="text-error">{{ paquete_form.fecha_fin.errors }}</span>
                         
                     </div>
 
                     <div class="input-group mb-3">
-                        {{ producto_form.stock }}
+                        {{ paquete_form.stock }}
                         <div class="input-group-append">
                         <div class="input-group-text">
                         </div>
                         </div>
                     </div>
-                    <span class="text-error">{{ producto_form.stock.errors }}</span>
+                    <span class="text-error">{{ paquete_form.stock.errors }}</span>
                     
                     <div class="input-group mb-3">
-                        {{ producto_form.tipo }}
+                        {{ paquete_form.producto }}
                         <div class="input-group-append">
                         <div class="input-group-text">
                         </div>
                         </div>
                     </div>
-                    <span class="text-error">{{ producto_form.tipo.errors }}</span>
+                    <span class="text-error">{{ paquete_form.producto.errors }}</span>
+                    <div class="d-flex justify-content-end">
                     
-                    {% if accion != "register" %}
+              <!--     {% if accion != "register" %}
                     <h3>Imágenes actuales</h3>
                     <hr>
                     <div class="d-flex flex-wrap">
@@ -127,13 +119,14 @@
                     {% endif %}
                     <h3>Agregar imágenes</h3>
                     <hr>
-                    <input type="file" class="form-control mb-3" multiple name="imagenes" id="imgs">
+                    <input type="file" class="form-control mb-3" multiple name="imagenes" id="imgs"> -->
+
                     <div class="d-flex justify-content-end">
                         <button type="submit" 
                         {% if accion == "register" %}
-                            name="experiencias-create" 
+                            name="paquetes-create" 
                             {% else %}
-                            name="experiencias-edit"
+                            name="paquetes-edit"
                         {% endif %}
                         class="btn btn-primary btn-block">Guardar</button>
                     </div>

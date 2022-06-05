@@ -1,0 +1,57 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Paquetes {% endblock %} 
+
+<!-- Element injected in the BODY element -->
+{% block body_class %} sidebar-mini layout-fixed {% endblock body_class %} 
+
+{% block content %}  
+    <div class="d-flex justify-content-between align-items-center pt-5 pb-5">
+      <div class="m-3">
+        <h1 class="">Paquetes</h1>
+      </div>
+      <div class="d-flex flex-wrap align-items-center m-3" style="gap: 10px;">
+
+        <a href="{% url 'paquetes-create'%}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Crear paquete</a>
+      </div>
+      
+    </div>
+    <div class="grid_experiencias">
+        {% for paquete in paquetes  %}         
+        <div class="card grid_experiencias__card" style="">
+         <!-- <img src="{{experiencia.imagen_set.all.0.image.url}}" class="card-img-top" alt="{{experiencia.imagen_set.all.0.image}}" style="object-fit:cover; height:350px">-->
+          <div class="card-body grid_experiencias__card">
+            <h5 class="card-title"><b>{{paquete.nombre}}</b></h5>
+            <p class="card-text">{{paquete.descripcion|slice:"0:40"}}</p>
+            <a href="{% url 'paquetes-edit' paquete.id %}" class="btn btn-secondary">Editar</a>
+            <a href="{% url 'paquetes-delete' paquete.id %}" class="btn btn-danger">Eliminar</a>
+          </div>
+        </div>
+        {% empty %}
+          <h3 style="display: block;">No hay paquetes registrados</h3>
+      {% endfor %}
+    </div>
+    {% if paquetes.paginator.num_pages > 1 %}
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          {% if paquetes.has_previous %}
+            
+            
+
+          {% for p in paquetes.paginator.page_range %}
+              {% if forloop.counter == paquetes.number %}
+                
+               
+              {% endif %}  
+          {% endfor %}
+          
+          {% if experiencias.has_next %}
+           
+          
+          {% endif %}
+        {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+    
+{% endblock content %}
