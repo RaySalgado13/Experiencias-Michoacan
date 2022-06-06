@@ -136,15 +136,8 @@ class ReservacionForm(forms.ModelForm):
 
 class PaqueteForm(forms.ModelForm):
 
-    class Meta:
-        model = Paquete
-        
-        exclude = ('empresa','tipo')
-
-
-    def __init__(self, empresa, *args,**kwars):
-        super(PaqueteForm, self).__init__( *args, **kwars)
-        self.fields['producto'].queryset = Producto.objects.filter(empresa=empresa)
+   
+    
 
     nombre = forms.CharField(
         widget=forms.TextInput(
@@ -195,8 +188,19 @@ class PaqueteForm(forms.ModelForm):
             }
         ))
 
-        
 
+    class Meta:
+        model = Paquete
+        
+        exclude = ('empresa','tipo')
+
+
+    def __init__(self, empresa, *args,**kwars):
+        super(PaqueteForm, self).__init__( *args, **kwars)
+        self.fields['producto'].queryset = Producto.objects.filter(empresa=empresa)
+
+
+        
        
 
     
