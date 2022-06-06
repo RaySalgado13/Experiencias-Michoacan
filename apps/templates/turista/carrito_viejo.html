@@ -56,7 +56,14 @@
                     <img class="img img-fluid" style="max-width: 200px;" src="{{producto.imagen_set.all.0.image.url}}">   
                 </td>
                 <td> <a href="{% url 'detalles' producto.id %}">{{ producto.nombre }}</a></td>
-                <td>{{ item.cantidad }}</td>
+            <td>
+                <form action="{% url 'carro_add' producto.id %}" method="post">
+                    {{ item.update_cantidad_form.cantidad }}
+                    {{ item.update_cantidad_form.update }}
+                    <input type="submit" value="Actualiza">
+                    {% csrf_token %}
+                </form>
+            </td>
                 <td><a href="{% url 'carro_remover' producto.id %}">Eliminar</a></td>
                 <td class="num">${{ item.precio_total }}</td>
             </tr>

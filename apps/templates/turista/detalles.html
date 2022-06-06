@@ -86,7 +86,9 @@
               </div>
               
               <form action="{% url 'carro_add' detalles.id %}" method="post">
-                {{carro_producto_form}}
+              <div style="visibility: hidden;">
+              <span>{{carro_producto_form}}</span>
+            </div> 
                 {% csrf_token %}
               <div class="mt-4">
                 <div  class="btn btn-primary btn-lg btn-flat">

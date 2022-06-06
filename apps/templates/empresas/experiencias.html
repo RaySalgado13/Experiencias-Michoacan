@@ -27,8 +27,9 @@
       </div>
       
     </div>
+
     <div class="grid_experiencias">
-        {% for experiencia in experiencias  %}         
+  {% for experiencia in experiencias  %}         
         <div class="card grid_experiencias__card" style="">
           <img src="{{experiencia.imagen_set.all.0.image.url}}" class="card-img-top" alt="{{experiencia.imagen_set.all.0.image}}" style="object-fit:cover; height:350px">
           <div class="card-body grid_experiencias__card">
@@ -36,13 +37,44 @@
             <p class="card-text">{{experiencia.descripcion|slice:"0:40"}}...</p>
             <p class="card-text">{{experiencia.tipo}}</p>
             <a href="{% url 'experiencias-edit' experiencia.id %}" class="btn btn-secondary">Editar</a>
-            <a href="{% url 'experiencias-delete' experiencia.id %}" class="btn btn-danger">Eliminar</a>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger-{{experiencia.id}}">
+              Eliminar
+            </button>
           </div>
         </div>
-        {% empty %}
-          <h3 style="display: block;">No hay experiencias registradas</h3>
+        {% endfor %}
+      
+        
+
+    <form role="form" method="POST" action="">
+      {% csrf_token %}
+      {% for experiencia in experiencias  %} 
+      <div class="modal fade" id="modal-danger-{{experiencia.id}}" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content bg-danger">
+            <div class="modal-header">
+              <h4 class="modal-title">¿Está seguro que desea eliminar la experiencia {{experiencia.nombre}}?</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Esta acción puede borras ciertos campos en sus reservaciones, eliminelas bajo su propio riesgo</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Regresar</button>
+              <a class="btn btn-danger" href="{% url 'experiencias-delete' experiencia.id %}">Eliminar</a>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
       {% endfor %}
-    </div>
+    </form>
+  </div>
+    
+  
     {% if experiencias.paginator.num_pages > 1 %}
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">

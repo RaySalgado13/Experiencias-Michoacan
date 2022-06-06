@@ -1,9 +1,10 @@
+from email import message
 from itertools import product
 from tkinter import EW
 from django.views.decorators.csrf import csrf_exempt
 import json
 from multiprocessing import context
-from turtle import st
+from turtle import st, update
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django import template
@@ -20,7 +21,7 @@ from .forms import CarroAddProcutoForm, ReservacionCreateForm
 from django.core.paginator import Paginator
 from django.views.generic import ListView, CreateView, DetailView, TemplateView
 from datetime import datetime
-
+from django.core.mail import send_mail
 
 from apps.home.models import Producto, Tipo_producto
 
@@ -84,6 +85,7 @@ def catalogo_paquetes(request):
 def detalle(request,id_producto):
 
     productos = Producto.objects.filter(id=id_producto)
+
 
     detallesObj = Producto.objects.get(id=id_producto)
 
@@ -158,6 +160,11 @@ def compra_inmediata(request, producto_id):
         form = ReservacionCreateForm(request.POST)
         if form.is_valid():
             order = form.save()
+            subject = "Tu pedido se ha completado"
+            message="Tu orden numero" + str(order.id) + "se ha completado"
+            email_from= settings.EMAIL_HOST_USER
+            recipient_list= [request.POST["email"],]
+            send_mail(subject,message,email_from,recipient_list)
             b = Reservacion.objects.latest('id')
             elme = b.id 
             x = pro.empresa
@@ -176,12 +183,18 @@ def compra_inmediata(request, producto_id):
     return render(request,'turista/create_i.html',{'productos':producto,'form':form})
 
 def compra_inmediata_paquete(request, paquete_id):
+    stock = request.GET.get('stock')
     paquete = Paquete.objects.filter(id=paquete_id)
     pro = Paquete.objects.get(id=paquete_id)
     if request.method == 'POST':
         form = ReservacionCreateForm(request.POST)
         if form.is_valid():
             order = form.save()
+            subject = "Tu pedido se ha completado"
+            message="Tu orden numero" + str(order.id) + "se ha completado"
+            email_from= settings.EMAIL_HOST_USER
+            recipient_list= [request.POST["email"],]
+            send_mail(subject,message,email_from,recipient_list)
             b = Reservacion.objects.latest('id')
             elme = b.id 
             x = pro.empresa
@@ -197,6 +210,7 @@ def compra_inmediata_paquete(request, paquete_id):
             return render(request,'turista/created.html',{'order':order, 'productos':paquete,'form':form})
     else:
         form = ReservacionCreateForm()
+        print(stock)
     return render(request,'turista/create_i.html',{'productos':paquete,'form':form})
 
 
@@ -222,11 +236,12 @@ def carro_add(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
     form = CarroAddProcutoForm(request.POST)
     if form.is_valid():
-        cd = form.cleaned_data
+        cd = form.cleaned_data  
         carro.add(producto=producto,
                     cantidad=cd['cantidad'],
-                    update_cantidad=cd['update']
-                    )
+                    update_cantidad=cd['update'])
+
+
     return redirect('carro')
 
 def carro_remover(request, producto_id):
@@ -237,6 +252,11 @@ def carro_remover(request, producto_id):
 
 def carro_detalle(request):
     carro = Carro(request)
+    for item in carro:
+        item['update_cantidad_form'] = CarroAddProcutoForm(
+            initial={'cantidad': item['cantidad'],
+            'update': True})
+        
     return render(request, 'turista/carrito_viejo.html', {'carro': carro})
 
 
@@ -248,8 +268,14 @@ def reser_create(request):
     carro = Carro(request)
     if request.method == 'POST':
         form = ReservacionCreateForm(request.POST)
+        
         if form.is_valid():
             order = form.save()
+            subject = "Tu pedido se ha completado"
+            message="Tu orden numero" + str(order.id) + "se ha completado"
+            email_from= settings.EMAIL_HOST_USER
+            recipient_list= [request.POST["email"],]
+            send_mail(subject,message,email_from,recipient_list)
             b = Reservacion.objects.latest('id')
             elme = b.id
             for item in carro:

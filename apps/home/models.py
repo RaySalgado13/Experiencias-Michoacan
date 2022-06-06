@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 class Producto(models.Model):
     nombre = models.CharField(max_length=250)
     descripcion = models.TextField()
-    precio = models.PositiveIntegerField()
+    precio = models.IntegerField()
     fecha_inicio = models.DateTimeField(blank = True, null=True)
     fecha_fin = models.DateTimeField(blank = True, null=True)
     stock = models.IntegerField(blank = True, null=True)

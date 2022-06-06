@@ -162,3 +162,11 @@ CARRO_SESSION_ID = 'carro'
 
 STRIPE_PUBLIC_KEY = "pk_test_51KnukZEnY3WIng0QiWdqwLR7kJzV1SpP5eI2yexzxxXD882oYRkQ0nMbaplCdp7lCmTx8WJ12CaPddDR87iawDgw00VxUrzgvc"
 STRIPE_SECRET_KEY =  "sk_test_51KnukZEnY3WIng0Q1i3sIG8g92yuq8qB4EWFSJoCRxMIKsWazT9wjUW7p7TKr6CrFrVkHKEqO2AsGqDJH59AQeEI0079Qt9ehI"
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "edragona21@gmail.com"
+EMAIL_HOST_PASSWORD = "Gordito21"

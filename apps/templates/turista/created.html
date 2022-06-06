@@ -16,14 +16,29 @@
 
 
 {% block content %}
-<h1>Thank you</h1>
-<p>Your order has been successfully completed. Your order number is
-<strong>{{ order.id }}</strong>.</p>
+<style> 
+    html {
+        font-family: 'Signika Negative', sans-serif;
+        font-size: 1em;
+    }
+    </style>
+
+<div class="form-group text-center">
+<h1>Gracias!</h1>
+<h4>Tu pedido a sido creado exitosamente. El siguiente es su numero de orden 
+<strong>{{ order.id }}</strong>.</h4>
 <form action="{% url 'cancel'  %}" method="post">
                
     {% csrf_token %}
-<button class="btn btn-primary" type="submit" id="checkout-button">
+<h4>Nota: Si desea cancelar la operación debe hacerlo en este momento, de lo contrario deberá contactarse con la empresa directamente.</h4>
+<button class="btn btn-danger btn-lg" type="submit" id="checkout-button">
     Cancelar
 </button>
 </form>
+<form action="{% url 'catalogo'  %}" method="get">
+<button class="btn btn-success btn-lg" href="{% url 'catalogo' %}">
+    Continuar
+</button>
+</form>
+</div>
 {% endblock %}

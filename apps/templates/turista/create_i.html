@@ -16,25 +16,33 @@
 
 
 {% block content %}
-<div class="order-info">
-    <h3>Tu compra</h3>
-    <ul>
-    {% for item in productos %}
-    <li>
-     {{ item.nombre }}
-    <span>${{ item.precio }}</span>
-    </li>
-    
-    </ul>
-    
-    <p>Total: ${{ item.precio }}</p>
+<style> 
+    html {
+        font-family: 'Signika Negative', sans-serif;
+        font-size: 1em;
+    }
+    </style>
+
+        <div class="form-group text-center">
+        <h3>Tu compra</h3>
+        <ul>
+        {% for item in productos  %}
+        <li>
+        {{ item.nombre }}
+        <span>${{ item.precio }}</span>
+        </li>
+       
+        </ul>
+        <p>Total: ${{ item.precio }}</p>
+        </div>
+        {% endfor %}
+        <form action="." method="post" class="order-form text-center">
+        {{ form.as_p }}
+        <p><input type="submit" class="btn btn-primary" value="Hacer pedido"></p>
+        {% csrf_token %}
+        </form>
     </div>
-    {% endfor %}
-    <form action="." method="post" class="order-form">
-    {{ form.as_p }}
-    <p><input type="submit" value="Place order"></p>
-    {% csrf_token %}
-    </form>
+
 
 
 
