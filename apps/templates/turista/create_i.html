@@ -19,16 +19,17 @@
 <div class="order-info">
     <h3>Tu compra</h3>
     <ul>
-    {% for item in cart %}
+    {% for item in productos %}
     <li>
-    {{ item.cantidad }}x {{ item.producto.nombre }}
+     {{ item.nombre }}
     <span>${{ item.precio }}</span>
     </li>
-    {% endfor %}
+    
     </ul>
     
-    <p>Total: ${{ cart.obt_precio_total }}</p>
+    <p>Total: ${{ item.precio }}</p>
     </div>
+    {% endfor %}
     <form action="." method="post" class="order-form">
     {{ form.as_p }}
     <p><input type="submit" value="Place order"></p>

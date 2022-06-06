@@ -127,6 +127,7 @@ def experiencias_imgDelete(request, id_img):
 @allowed_users(allowed_roles=['empresas',])
 def experienciasD(request, id_experiencia):
     experiencia = Producto.objects.get(id = id_experiencia)
+    
     experiencia.delete()
 
     return redirect(f"/empresas/experiencias/")
@@ -266,6 +267,7 @@ def paquetesEdit(request, id_paquete):
 @allowed_users(allowed_roles=['empresas',])
 def paquetesD(request, id_paquete):
    
-
+    paquete = Paquete.objects.get(id =  id_paquete)
+    paquete.delete()
     
-    return HttpResponse("crear")
+    return redirect(f"/empresas/paquetes/")

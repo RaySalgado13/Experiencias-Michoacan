@@ -58,12 +58,12 @@
             <div class="col-12 col-sm-6">
               <h3 class="d-inline-block d-sm-none">{{ detalles.nombre }}</h3>
               <div class="col-12">
-                <img src="{{imagenes.all.0.image.url}}" class="product-image h-100" alt="" style="object-fit:cover; height:350px">
+                <img src="{{detalles.producto.all.0.imagen_set.all.0.image.url}}" class="product-image h-100" alt="" style="object-fit:cover; height:350px">
               </div>
               <div class="col-12 product-image-thumbs">
-                {% for imagen in imagenes  %} 
+                {% for detalle in paquetes  %} 
                
-                <div class="product-image-thumb active" ><img src="{{imagen.image.url}}" alt="Product Image"></div>
+                <!--<div class="product-image-thumb active" ><img src="{detalle.producto.all.imagen_set.all.image.url}}" alt="Product Image"></div> -->
                 
                 {% endfor %}
               </div>
@@ -84,9 +84,9 @@
                 <h4 class="mt-0">
                 </h4>
               </div>
-              
+
               <form action="{% url 'carro_add' detalles.id %}" method="post">
-                {{carro_producto_form}}
+               
                 {% csrf_token %}
               <div class="mt-4">
                 <div  class="btn btn-primary btn-lg btn-flat">

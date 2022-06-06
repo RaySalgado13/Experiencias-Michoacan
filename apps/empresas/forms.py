@@ -139,7 +139,7 @@ class PaqueteForm(forms.ModelForm):
     class Meta:
         model = Paquete
         
-        exclude = ('empresa',)
+        exclude = ('empresa','tipo')
 
 
     def __init__(self, empresa, *args,**kwars):

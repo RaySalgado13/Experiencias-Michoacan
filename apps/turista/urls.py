@@ -11,8 +11,10 @@ urlpatterns = [
     # The home page
     path("", views.index, name='index_t'),
     path("catalogo/", views.catalogo, name='catalogo'),
+    path("paquetes/", views.catalogo_paquetes, name='paquetes'),
     path("detalles/<int:id_producto>/", views.detalle, name='detalles'),
-    path("compra_inmediata/", views.compra_inmediata, name='compra_inmediata'),
+    path("detalles_paquete/<int:id_paquete>/", views.detalle_paquete, name='detalles_paquete'),
+    path("compra_inmediata/<int:producto_id>/", views.compra_inmediata, name='compra_inmediata'),
     path("carrito/", views.carro_detalle, name='carro'),
     path('add/<int:producto_id>/', views.carro_add, name='carro_add'),
     path('eliminar/<int:producto_id>/', views.carro_remover, name='carro_remover'),

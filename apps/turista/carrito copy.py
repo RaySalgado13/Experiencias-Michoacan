@@ -15,7 +15,7 @@ class Carro(object):
         self.carro = carro
 
 
-    def add(self, producto, cantidad=1, update_cantidad=False):
+    def add(self, producto, cantidad, update_cantidad=False):
         # Añadir un producto al carro o actulizar la cantidad
 
         producto_id = str(producto.id)

@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 class Producto(models.Model):
     nombre = models.CharField(max_length=250)
     descripcion = models.TextField()
-    precio = models.IntegerField()
+    precio = models.PositiveIntegerField()
     fecha_inicio = models.DateTimeField(blank = True, null=True)
     fecha_fin = models.DateTimeField(blank = True, null=True)
     stock = models.IntegerField(blank = True, null=True)
@@ -78,7 +78,7 @@ class Reservacion(models.Model):
     telefono = models.CharField(max_length=10, blank = True)
     fecha = models.DateTimeField(auto_now = True)
     status = models.CharField(max_length=50, blank = True)
-    producto = models.ManyToManyField(Producto, blank = True)
+    producto = models.ManyToManyField(Producto ,blank = True )
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT, null=True, blank = True)
@@ -116,6 +116,9 @@ class Paquete(models.Model):
     fecha_fin = models.DateTimeField(blank = True, null=True)
     stock = models.IntegerField(blank = True, null=True)
     producto = models.ManyToManyField(Producto, blank = True)
+    tipo = models.ForeignKey('Tipo_producto' , on_delete=models.PROTECT,default=2)
+    
+    
     
     def __str__(self):
         return self.nombre
